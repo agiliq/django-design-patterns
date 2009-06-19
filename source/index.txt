@@ -1,3 +1,14 @@
 =================
 Index
 =================
+
+This is a collection of patterns which we have found occuring commonly with
+Django. All of these either make collaboration easier, coding simpler or code
+more maintainable. None of them are design patterns in the sense of GoF design
+patterns. We call them design patterns as none other seem closer or more
+convinient.
+
+These are guidelines, which need to be overriden (very commonly, in some cases).
+Use your judgement when using them. As PEP8 says, "Foolish consistency is the
+hobgoblin of small minds."
+

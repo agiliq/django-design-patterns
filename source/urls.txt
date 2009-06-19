@@ -1,3 +1,51 @@
 =================
 Urls
 =================
+
+Projects and apps
+--------------------
+
+There should be one urls.py at the project level, and one urls.py at each app
+level. The project level urls.py should include each of the urls.py under a
+prefix.
+
+    #project urls.py
+    
+    urlpatterns = patterns(
+        '',
+        (r'^', include('mainpages.urls')),
+        (r'^admin/(.*)', admin.site.root),
+        (r'^captcha/', include('yacaptcha.urls')),
+        .....
+    )
+    
+    #app urls.py
+    urlpatterns = patterns(
+        'app.views',
+        url(r'^$', 'index'),
+        url(r'^what/$', 'what_view')
+        .....
+    )
+
+Naming urls
+---------------
+
+Urlpatterns should be named. This is done as
+
+    url(r'^$', 'index', name='main_index'),
+    
+This enables calling `{% url urlpatternname %}` much easier.
+
+The pattern name should be of the form `appname_viewname`. If the same view is
+used in multiple urlpatterns, the name should be of form `appname_viewname_use`,
+as in `search_advanced_auth` and `search_advanced_unauth`.
+
+    #urls.py for app search
+    urlpatterns = patterns(
+    'search.views'
+    url(r'^advanced_product_search/$', 'advanced', name='search_advanced_product'),
+    url(r'^advanced_content_search/$', 'advanced', name='search_advanced_content'),
+    ...
+    )
+
+
