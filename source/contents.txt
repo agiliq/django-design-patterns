@@ -2,7 +2,7 @@
 Welcome to Django design patterns's documentation!
 ==================================================
 
-Here be contents
+
 
 
 

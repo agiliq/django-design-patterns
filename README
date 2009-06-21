@@ -1,0 +1,9 @@
+Django design patterns is a book about commonly occuring patterns in Django. Not
+patterns in Gof sense, but patterns in the sense, we work this way, and it works
+for us. For us it is a ~pattern of work~ sense.
+
+At this point this is just a lot of brain dump from us.
+
+The latest sources are always available from
+http://github.com/uswaretech/django-design-patterns/tree/master
+and latest html from http://djangodesignpatterns.uswaretech.net/
