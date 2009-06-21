@@ -18,6 +18,16 @@ settings in settings.py
 
 This file should not be checked in your repository.
 
+Use templatetags when the output doesnot depend on the Request
+-------------------------------------------------------------------
+In your sidebar suppose you want to show the 5 latest comments. You do not need
+the request to output this. Make it as a templatetag.
+
+Import as if your apps are on your project path
+----------------------------------------------------
+Instead of doing `from project.app.models import ModelClass` do `from app.models
+import ModelClass`. Your apps are reusable
+
 
 
 
