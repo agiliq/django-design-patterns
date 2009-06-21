@@ -1,3 +1,60 @@
 =================
 Models
 =================
+
+Multiple managers
+--------------------
+A Model class can have multiple managers, depending upon your needs. Suppose you
+do not want to display any object on your site which is unapproved(is_approved =
+False in your Model).
+
+    class ModelClassApprovedOnlyManager(models.Manager):
+        self.get_query_set().filter(is_approved = True)
+    
+    class ModelClass(models.Model):
+        ...
+        is_approved = models.BooleanField(default = False)
+        
+        all_objects = models.Manager()
+        objects = ModelClassApprovedOnlyManager()
+        
+Hierarchical Relationships
+----------------------------
+You may want to model hierarchical relationships. The simplest way to do this is
+
+    class ModelClass(models.Model):
+        ...
+        parent = models.ForeignKey('ModelClass')
+        
+This is called adjacency list model, is very inefficient for large trees. If you
+trees are very shallow you can use this. Otherwise you want to use a more
+complex modeling called MPTT. Fortunately, you can just use django-mptt.
+
+Singleton classes
+-------------------
+Sometimes you want to make sure that only one Object of a Model can be created.
+
+Logging
+-----------
+To make sure, when an object is create/edited/deleted, there is a log.
+
+Audit Trail and rollback
+----------------------------
+When an object is modified or deleted, to be able to go back to the previous
+version.
+
+Define an __unicode___
+--------------------------
+Until you define an `__unicode__` for your ModelClass, in Admin and at various
+other places you will get an `<ModelClass object>` where the object needs to be
+displayed. Define a meaningful `__unicode__` for you ModelClass, to get
+meaningful display. Once you define `__unicode__`, you do not need to define
+`__str__`.
+
+Define a get_absolute_url()
+-----------------------------
+`get_absolute_url` is used at various places by Django. (In Admin for "view on
+site" option, and in feeds framework). 
+
+
+

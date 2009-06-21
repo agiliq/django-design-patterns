@@ -1,3 +1,47 @@
 =================
 Views
 =================
+
+Generic views
+------------------
+Use generic views where possible.
+
+Generic views are just functions
+------------------------------------
+This means you can use them instead of calling say, `render_to_response`. For
+example, suppose you want to show a list of objects, so you would like to use
+`django.views.generic.object_list`. However, you also want to allow comments to
+be posted on these objects, which this generic view does not allow.
+
+    def object_list_comment(request):
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                obj = form.save()
+                ...
+                #redirect
+        #Handle get or invalid form Post
+        queryset = ModelClass.object.filter(...)
+        payload = {'form':form}
+        return object_list(request, queryset, extra_context = payload)
+    
+
+Handle GET and POST in same view function
+----------------------------------------------
+
+
+Querysets are chainable and lazy
+-----------------------------------
+This means that your view can keep on creating querysets and they would be
+evaluated onlly when used. Supposed when you have an advanced search view which
+can take multiple criteria all of which are optional.
+
+    def advanced_search(request, criteria1=None, criteria2=None, criteria3=None):
+        queryset = ModelClass.objects.all()
+        if criteria1:
+            queryset.filter(critera1=critera1)
+        if criteria2:
+            queryset.filter(critera2=critera2)
+        if criteria3:
+            queryset.filter(critera3=critera3)
+        return objects_list(request, queryset=queryset)

@@ -1,3 +1,23 @@
 =================
 Misc
 =================
+
+settings.py and localsettings.py
+------------------------------------
+The settings for your project which are a machine specific should be refactored
+out of settings.py into localsettings.py. In your settings.py, you should do
+
+try:
+    from localsettings import *
+except ImportError:
+    print 'localsetting could not be imported'
+    pass #Or raise
+    
+This should be at the end of settings.py, so that localsetting.py override
+settings in settings.py
+
+This file should not be checked in your repository.
+
+
+
+

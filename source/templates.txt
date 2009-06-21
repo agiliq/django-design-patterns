@@ -13,21 +13,35 @@ the app levels. The app level base.html should extend the project level
     <html>
     <head>
     <title>{% block title %}My Super project{% endblock %}</title>
-    .........
+    ...
     
     {# app base.html #}
     
     {% extends 'base.html' %}
     
     {% block title %}{{ block.super }} - My duper app {% endblock %}
-    .......
+    ...
     
     
     {# login.html #}
     
     {% extends 'auth/base.html' %}
     {% block title %}{{ block.super }} - Login {% endblock %}
-    .......
+    ...
+    
+
+Location of templates
+----------------------------
+
+The templates for an app should be available as `appname/template.html`. So the
+templates should be physically located at either
+
+1. project/templates/app/template.html
+2. project/app/templates/app/template.html
+
+This allows two apps to have the same templates names.
+
+
 
 
 
