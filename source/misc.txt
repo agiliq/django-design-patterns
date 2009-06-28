@@ -18,6 +18,21 @@ settings in settings.py
 
 This file should not be checked in your repository.
 
+Use relative path in settings.py
+--------------------------------------
+Instead of writing
+
+    TEMPLATE_DIRS = '/home/user/project/templates'
+    
+Do
+
+    #settings.py
+    import os
+    
+    CURRENT_DIR = os.path.dirname(__file__)
+    TEMPLATE_DIRS = os.path.join(CURRENT_DIR, 'template')
+
+
 Use templatetags when the output doesnot depend on the Request
 -------------------------------------------------------------------
 In your sidebar suppose you want to show the 5 latest comments. You do not need
