@@ -41,6 +41,29 @@ templates should be physically located at either
 
 This allows two apps to have the same templates names.
 
+Hadling iterables which maybe empty
+-----------------------------------------
+
+In your view you do
+
+    posts = BlogPosts.objects.all()
+    ...
+    payload = {'posts':posts}
+    return render_to_response('blog/posts.html', payload, ..)
+    
+Now `posts` may be empty, so in template we do,
+
+{% if posts %}
+    {% for post in posts %}
+        ...
+    {% endfor %}
+    
+    
+{% else %}
+
+{% endif %}
+
+
 
 
 

@@ -28,6 +28,34 @@ Import as if your apps are on your project path
 Instead of doing `from project.app.models import ModelClass` do `from app.models
 import ModelClass`. Your apps are reusable
 
+Naming things
+-----------------
+
+Model class names should be singular, not plural.
+
+    class Post(models.Model):
+        ...
+
+and not
+    
+    class Posts(models.Model):
+        ...
+
+Foreign key should use the name of referenced class.
+
+class Post(models.Model):
+        user = models.ForeignKey(User)
+        
+Queryset should be plural, instances should be singular.
+
+    posts = Post.objects.all()
+    posts = Post.objects.filter(...)
+    
+    post = Post.object.get(pk = 5)
+    post = Post.object.latest()
+    
+    
+
 
 
 

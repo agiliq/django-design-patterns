@@ -54,7 +54,52 @@ meaningful display. Once you define `__unicode__`, you do not need to define
 Define a get_absolute_url()
 -----------------------------
 `get_absolute_url` is used at various places by Django. (In Admin for "view on
-site" option, and in feeds framework). 
+site" option, and in feeds framework).
+
+AuditFields
+----------------
+
+Say you want to keep track of when was an object created and uodated. Create
+two DateTimeFields with `auto_now` and `auto_now_add`.
+
+    class ItemSold(models.Model):
+        name = models.CharField(max_length = 100)
+        value = models.PositiveIntegerField()
+        ...
+        #Audit field
+        created_on = models.DateTimeField(auto_now_add = True)
+        updated_on = models.DateTimeField(auto_now = True)
+        
+Now you want, created_by and updated_by. This is possible using the
+threadlocals(http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser)
+technique, but since we [do not want](http://www.b-list.org/weblog/2008/dec/24/admin/)
+to do that, we will need to pass user to the methods.
+
+    class ItemSold(models.Manager):
+        def create_item_sold(self, user, ...):
+            
+
+    class ItemSold(models.Model):
+        name = models.CharField(max_length = 100)
+        value = models.PositiveIntegerField()
+        ...
+        #Audit field
+        created_on = models.DateTimeField(auto_now_add = True)
+        updated_on = models.DateTimeField(auto_now = True)
+        created_by = models.ForeignKey(User, ...)
+        updated_by = models.ForeignKey(User, ...)
+        
+        def set_name(self, user, value):
+            self.created_by = user
+            self.name = value
+            super(ItemSold, self).save()
+            
+        ...
+
+    objects = ItemSoldManager()
+
+
+
 
 
 
