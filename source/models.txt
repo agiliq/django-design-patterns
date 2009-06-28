@@ -97,7 +97,42 @@ to do that, we will need to pass user to the methods.
         ...
 
     objects = ItemSoldManager()
+    
+Working with denormalised fields
+-----------------------------------
 
+Working with child tables.
+
+Say you want to keep track of number of employees of a department.
+
+    class Department(models.Model):
+        name = models.CharField(max_length = 100)
+        employee_count = models.PositiveIntegerField(default = 0)
+        
+        
+    class Employee(models.Model):
+        department = models.ForeignKey(Department)
+    
+One way to do so would be to override, `save` and `delete`.
+
+    class Employee(models.Model):
+        ...
+        
+        def save(self):
+            if not self.id:
+                #this is a create, not an update
+                self.department.employee_count += 1
+                self.department.save()
+            super(Employee, self).save()
+            
+        def delete(self):
+            self.department.employee_count -= 1
+            self.department.save()
+            super(Employee, self).save()
+            
+Other option would be to attach listeners for `post_save` and `post_delete`.
+#TODO
+    
 
 
 
