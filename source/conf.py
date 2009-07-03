@@ -26,7 +26,7 @@ import sys, os
 extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['.templates']
+templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.txt'
@@ -179,4 +179,5 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_use_modindex = True
+
 
