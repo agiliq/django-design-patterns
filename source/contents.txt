@@ -2,6 +2,25 @@
 Welcome to Django design patterns's documentation!
 ==================================================
 
+Prerequisites
+------------------
+
+1. You know python. If you do not, try `Dive into Python<http://diveintopython.org/>`
+2. You know Django. You work with Django 1.0+. If you do not try `Djangobook<http://www.djangobook.com/>`
+
+Getting the docs
+----------------------
+The documents are generated using `Sphinx<http://sphinx.pocoo.org/>`. The code
+is available on `Github<http://github.com/uswaretech/django-design-patterns/tree/master>`.
+The generated Html is available on http://djangodesignpatterns.uswaretech.net/
+
+License
+-------------
+This work is dual licensed under
+`Creative Commons Attribution-Share Alike 3.0 Unported License<http://creativecommons.org/licenses/by-sa/3.0/>`
+and
+`GNU Free Documentation License<http://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License>`
+
 
 
 
