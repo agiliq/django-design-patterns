@@ -56,6 +56,27 @@ Define a get_absolute_url()
 `get_absolute_url` is used at various places by Django. (In Admin for "view on
 site" option, and in feeds framework).
 
+Use @permalink for calculating get_absolute_url
+---------------------------------------------------
+You want only one canonical representation of your urls. This should be in urls.py
+
+If you write a class like
+
+    class Customer(models.Model)
+        ...
+        
+        def get_absolute_url(self):
+            return /customer/%s/ % self.slug
+
+You have this representation at two places. You instead want to do
+
+    class Customer(models.Model)
+        ...
+        
+        @permalink
+        def get_absolute_url(self):
+            return ('customers.detail', self.slug)
+
 AuditFields
 ----------------
 

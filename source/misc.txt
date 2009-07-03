@@ -69,6 +69,34 @@ Queryset should be plural, instances should be singular.
     post = Post.object.get(pk = 5)
     post = Post.object.latest()
     
+Using pdb remotely
+------------------------
+Sometimes you will hit bugs which show up on servers but not on your local
+system. To handle these, you need to debug on the server. Doing `manage.py
+runserver` only allows local connections. To allow remote connections, use
+
+    python manage.py runserver 0.0.0.0:8000
+    
+So that your `pdb.set_trace()` which are on remote servers are hit when you access
+them from your local systems.
+
+Do not use primary keys in urls
+-----------------------------------
+If you use PK in urls you are giving away sensitive information, for example,
+the number of entries in your table. It also makes it trivial to guess other urls.
+
+If possible use Slugs in urls. This has the advantage of being both user and seo
+friendly. 
+    
+If slugs do not make sense, instead use a CRC algorithm.
+
+    class Customer(models.Model):
+        name = models.CharField(max_length = 100)
+        
+        def get_absolute_url(self):
+            import zlib
+            #Use permalink in real case
+            return '/customer/%s/' % zlib.crc32(self.pk)
     
 
 
