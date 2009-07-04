@@ -11,7 +11,7 @@ Generic views are just functions
 This means you can use them instead of calling say, `render_to_response`. For
 example, suppose you want to show a list of objects, so you would like to use
 `django.views.generic.object_list`. However, you also want to allow comments to
-be posted on these objects, which this generic view does not allow.
+be posted on these objects, which this generic view does not allow.::
 
     def object_list_comment(request):
         if request.method == 'POST':
@@ -34,7 +34,7 @@ Querysets are chainable and lazy
 -----------------------------------
 This means that your view can keep on creating querysets and they would be
 evaluated onlly when used. Supposed when you have an advanced search view which
-can take multiple criteria all of which are optional.
+can take multiple criteria all of which are optional.::
 
     def advanced_search(request, criteria1=None, criteria2=None, criteria3=None):
         queryset = ModelClass.objects.all()

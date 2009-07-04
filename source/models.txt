@@ -6,7 +6,7 @@ Multiple managers
 --------------------
 A Model class can have multiple managers, depending upon your needs. Suppose you
 do not want to display any object on your site which is unapproved(is_approved =
-False in your Model).
+False in your Model).::
 
     class ModelClassApprovedOnlyManager(models.Manager):
         self.get_query_set().filter(is_approved = True)
@@ -20,7 +20,7 @@ False in your Model).
         
 Hierarchical Relationships
 ----------------------------
-You may want to model hierarchical relationships. The simplest way to do this is
+You may want to model hierarchical relationships. The simplest way to do this is::
 
     class ModelClass(models.Model):
         ...
@@ -60,7 +60,7 @@ Use @permalink for calculating get_absolute_url
 ---------------------------------------------------
 You want only one canonical representation of your urls. This should be in urls.py
 
-If you write a class like
+If you write a class like::
 
     class Customer(models.Model)
         ...
@@ -68,7 +68,7 @@ If you write a class like
         def get_absolute_url(self):
             return /customer/%s/ % self.slug
 
-You have this representation at two places. You instead want to do
+You have this representation at two places. You instead want to do::
 
     class Customer(models.Model)
         ...
@@ -81,7 +81,7 @@ AuditFields
 ----------------
 
 Say you want to keep track of when was an object created and uodated. Create
-two DateTimeFields with `auto_now` and `auto_now_add`.
+two DateTimeFields with `auto_now` and `auto_now_add`.::
 
     class ItemSold(models.Model):
         name = models.CharField(max_length = 100)
@@ -94,7 +94,7 @@ two DateTimeFields with `auto_now` and `auto_now_add`.
 Now you want, created_by and updated_by. This is possible using the
 threadlocals(http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser)
 technique, but since we [do not want](http://www.b-list.org/weblog/2008/dec/24/admin/)
-to do that, we will need to pass user to the methods.
+to do that, we will need to pass user to the methods.::
 
     class ItemSold(models.Manager):
         def create_item_sold(self, user, ...):
@@ -124,7 +124,7 @@ Working with denormalised fields
 
 Working with child tables.
 
-Say you want to keep track of number of employees of a department.
+Say you want to keep track of number of employees of a department.::
 
     class Department(models.Model):
         name = models.CharField(max_length = 100)
@@ -134,7 +134,7 @@ Say you want to keep track of number of employees of a department.
     class Employee(models.Model):
         department = models.ForeignKey(Department)
     
-One way to do so would be to override, `save` and `delete`.
+One way to do so would be to override, `save` and `delete`.::
 
     class Employee(models.Model):
         ...

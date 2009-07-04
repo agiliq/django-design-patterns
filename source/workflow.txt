@@ -8,7 +8,7 @@ Use SVN, GIT, Hg whavere. But choose one and use it.
 
 Use a bug tracking tool.
 ----------------------------
-I recommend [Unfuddle](http://unfuddle.com/), (It has various other niecties).
+I recommend `Unfuddle <http://unfuddle.com/>`_, (It has various other niecties).
 But others might work for you.
 
 Use a schema migration tool

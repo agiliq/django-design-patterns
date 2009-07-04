@@ -6,7 +6,7 @@ Projects and apps.
 --------------------
 There should be one base.html at the project level, and one base.html at each of
 the app levels. The app level base.html should extend the project level
-`base.html`.
+`base.html`.::
 
     {# Eg Project base.html #}
     
@@ -44,24 +44,24 @@ This allows two apps to have the same templates names.
 Hadling iterables which maybe empty
 -----------------------------------------
 
-In your view you do
+In your view you do::
 
     posts = BlogPosts.objects.all()
     ...
     payload = {'posts':posts}
     return render_to_response('blog/posts.html', payload, ..)
     
-Now `posts` may be empty, so in template we do,
+Now `posts` may be empty, so in template we do,::
 
-{% if posts %}
-    {% for post in posts %}
-        ...
+    {% if posts %}
+        {% for post in posts %}
+            ...
     {% endfor %}
     
     
-{% else %}
+    {% else %}
 
-{% endif %}
+    {% endif %}
 
 
 

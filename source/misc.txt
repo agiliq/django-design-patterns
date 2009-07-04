@@ -5,13 +5,13 @@ Misc
 settings.py and localsettings.py
 ------------------------------------
 The settings for your project which are a machine specific should be refactored
-out of settings.py into localsettings.py. In your settings.py, you should do
+out of settings.py into localsettings.py. In your settings.py, you should do::
 
-try:
-    from localsettings import *
-except ImportError:
-    print 'localsetting could not be imported'
-    pass #Or raise
+    try:
+        from localsettings import *
+    except ImportError:
+        print 'localsetting could not be imported'
+        pass #Or raise
     
 This should be at the end of settings.py, so that localsetting.py override
 settings in settings.py
@@ -20,11 +20,11 @@ This file should not be checked in your repository.
 
 Use relative path in settings.py
 --------------------------------------
-Instead of writing
+Instead of writing::
 
     TEMPLATE_DIRS = '/home/user/project/templates'
     
-Do
+Do::
 
     #settings.py
     import os
@@ -46,22 +46,22 @@ import ModelClass`. Your apps are reusable
 Naming things
 -----------------
 
-Model class names should be singular, not plural.
+Model class names should be singular, not plural.::
 
     class Post(models.Model):
         ...
 
-and not
+and not::
     
     class Posts(models.Model):
         ...
 
-Foreign key should use the name of referenced class.
+Foreign key should use the name of referenced class.::
 
-class Post(models.Model):
-        user = models.ForeignKey(User)
+    class Post(models.Model):
+            user = models.ForeignKey(User)
         
-Queryset should be plural, instances should be singular.
+Queryset should be plural, instances should be singular.::
 
     posts = Post.objects.all()
     posts = Post.objects.filter(...)
@@ -73,7 +73,7 @@ Using pdb remotely
 ------------------------
 Sometimes you will hit bugs which show up on servers but not on your local
 system. To handle these, you need to debug on the server. Doing `manage.py
-runserver` only allows local connections. To allow remote connections, use
+runserver` only allows local connections. To allow remote connections, use::
 
     python manage.py runserver 0.0.0.0:8000
     
@@ -88,7 +88,7 @@ the number of entries in your table. It also makes it trivial to guess other url
 If possible use Slugs in urls. This has the advantage of being both user and seo
 friendly. 
     
-If slugs do not make sense, instead use a CRC algorithm.
+If slugs do not make sense, instead use a CRC algorithm.::
 
     class Customer(models.Model):
         name = models.CharField(max_length = 100)
