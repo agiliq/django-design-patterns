@@ -9,7 +9,8 @@ do not want to display any object on your site which is unapproved(is_approved =
 False in your Model).::
 
     class ModelClassApprovedOnlyManager(models.Manager):
-        self.get_query_set().filter(is_approved = True)
+        def get_query_set():
+            self.get_query_set().filter(is_approved = True)
     
     class ModelClass(models.Model):
         ...
@@ -154,6 +155,13 @@ One way to do so would be to override, `save` and `delete`.::
 Other option would be to attach listeners for `post_save` and `post_delete`.
 #TODO
     
+    
+Abstract custom queries in Manager methods.
+----------------------------------------------
+
+If you have some complex Sql query, not easily representable via Django ORM,
+you can write custom Sql. These should be abstracted as Manager methods.
+
 
 
 
