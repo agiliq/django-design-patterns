@@ -195,4 +195,20 @@ Instead of::
 The `.save()` should return a Model Object
 
 
+Code defensively in middleware and context processors.
+-----------------------------------------------------------
+Your middleware and context processors are going to be run for **all** requests.
+Have you handled all cases?
 
+    def process_request(request):
+        if user.is_authenticated():
+            profile = request.user.get_profile()#Hah, I create profiles during
+                                        #registration so this is safe.
+            ...
+            
+Or it is? What about users created via `manage.py createsuperuser`, with the
+above middleware, the default user can not even access the admi site.
+
+Hence handle all scenarios in middleware and context processors. This is one place
+where `try: .. except: ..` (bare except) block are acceptable. You do not wnat one
+middleare  bringing down entire site.
