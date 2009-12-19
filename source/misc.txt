@@ -10,7 +10,7 @@ out of settings.py into localsettings.py. In your settings.py, you should do::
     try:
         from localsettings import *
     except ImportError:
-        print 'localsetting could not be imported'
+        print 'localsettings could not be imported'
         pass #Or raise
     
 This should be at the end of settings.py, so that localsetting.py override
@@ -41,7 +41,7 @@ the request to output this. Make it as a templatetag.
 Import as if your apps are on your project path
 ----------------------------------------------------
 Instead of doing `from project.app.models import ModelClass` do `from app.models
-import ModelClass`. Your apps are reusable
+import ModelClass`. This makes you apps reusable  as they are not tied to a project.
 
 Naming things
 -----------------
@@ -56,12 +56,12 @@ and not::
     class Posts(models.Model):
         ...
 
-Foreign key should use the name of referenced class.::
+Foreign key should use the name of the referenced class.::
 
     class Post(models.Model):
             user = models.ForeignKey(User)
         
-Queryset should be plural, instances should be singular.::
+Querysets should be plural, instances should be singular.::
 
     posts = Post.objects.all()
     posts = Post.objects.filter(...)
@@ -207,8 +207,8 @@ Have you handled all cases?
             ...
             
 Or it is? What about users created via `manage.py createsuperuser`, with the
-above middleware, the default user can not even access the admi site.
+above middleware, the default user can not even access the admin site.
 
 Hence handle all scenarios in middleware and context processors. This is one place
-where `try: .. except: ..` (bare except) block are acceptable. You do not wnat one
-middleare  bringing down entire site.
+where `try: .. except: ..` (bare except) blocks are acceptable. You do not want one
+middleare  bringing down the entire site.

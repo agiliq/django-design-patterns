@@ -19,6 +19,9 @@ False in your Model).::
         all_objects = models.Manager()
         objects = ModelClassApprovedOnlyManager()
         
+If you use multiple managers, the first manager should be the default manager. This is as the first
+manager is accesible as `ModelClass._default_manager`, which is used by admin to get all objects.
+        
 Hierarchical Relationships
 ----------------------------
 You may want to model hierarchical relationships. The simplest way to do this is::
@@ -27,9 +30,9 @@ You may want to model hierarchical relationships. The simplest way to do this is
         ...
         parent = models.ForeignKey('ModelClass')
         
-This is called adjacency list model, is very inefficient for large trees. If you
+This is called adjacency list model, and is very inefficient for large trees. If your
 trees are very shallow you can use this. Otherwise you want to use a more
-complex modeling called MPTT. Fortunately, you can just use django-mptt.
+efficient but complex modeling called MPTT. Fortunately, you can just use django-mptt.
 
 Singleton classes
 -------------------

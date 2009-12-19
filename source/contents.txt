@@ -12,7 +12,7 @@ Getting the docs
 ----------------------
 The documents are generated using `Sphinx <http://sphinx.pocoo.org/>`_. The code
 is available on `Github <http://github.com/uswaretech/django-design-patterns/tree/master>`_.
-The generated Html is available on http://djangodesignpatterns.uswaretech.net/
+The generated Html is available on http://uswaretech.com/books/djangodesignpatterns/
 
 License
 -------------

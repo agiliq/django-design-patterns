@@ -4,8 +4,8 @@ templates
 
 Projects and apps.
 --------------------
-There should be one base.html at the project level, and one base.html at each of
-the app levels. The app level base.html should extend the project level
+There should be one base.html at the project level, and one `base.html` at each of
+the app levels. The app level `base.html` should extend the project level
 `base.html`.::
 
     {# Eg Project base.html #}
