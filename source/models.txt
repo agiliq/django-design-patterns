@@ -21,7 +21,48 @@ False in your Model).::
         
 If you use multiple managers, the first manager should be the default manager. This is as the first
 manager is accesible as `ModelClass._default_manager`, which is used by admin to get all objects.
+
+Custom Manager Methods
+----------------------
+Imagine you have a query like this::
+    
+    Event.objects.filter(status='P').filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
+
+you probably will need to filter by status and created date again, to avoid duplicating 
+code you could add custom methods to your default manager::
+
+    class EventQuerySet(models.query.QuerySet):
+        def published(self):
+            return self.get_query_set().filter(is_published=True)
         
+        def upcoming(self):
+            return self.get_query_set().filter(start_date__gte=datetime.datetime.now())        
+    
+    class EventManager(models.Manager):
+        def get_query_set(self):
+            return QuerySet(self.model, using=self._db) # note the `using` parameter, new in 1.2
+        
+        def published(self):
+            return self.get_query_set().published()
+        
+        def upcoming(self):
+            return self.get_query_set().upcoming()
+    
+    class Event(models.Model):
+        is_published = models.BooleanField(default=False)
+        start_date = models.DateTimeField()
+        ...
+        
+        objects = EventManager()    # override the default manager
+    
+
+This way you keep your logic in your model.
+Why do you need a custom QuerySet? To be able to chain method calls. Now that query could be::
+
+    Event.objects.published().upcoming().order_by('start_date')
+
+
+
 Hierarchical Relationships
 ----------------------------
 You may want to model hierarchical relationships. The simplest way to do this is::
