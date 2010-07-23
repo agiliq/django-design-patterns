@@ -33,10 +33,10 @@ code you could add custom methods to your default manager::
 
     class EventQuerySet(models.query.QuerySet):
         def published(self):
-            return self.get_query_set().filter(is_published=True)
+            return self.filter(is_published=True)
         
         def upcoming(self):
-            return self.get_query_set().filter(start_date__gte=datetime.datetime.now())        
+            return self.filter(start_date__gte=datetime.datetime.now())        
     
     class EventManager(models.Manager):
         def get_query_set(self):
