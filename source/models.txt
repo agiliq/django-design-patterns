@@ -153,10 +153,23 @@ One way to do so would be to override, `save` and `delete`.::
         def delete(self):
             self.department.employee_count -= 1
             self.department.save()
-            super(Employee, self).save()
+            super(Employee, self).delete()
             
-Other option would be to attach listeners for `post_save` and `post_delete`.
-#TODO
+Other option would be to attach listeners for `post_save` and `post_delete`.::
+
+    from django.db.models import signals
+    
+    def increment_employee_count(sender, instance, raw, created, **kwargs):
+        if created:
+            instance.department.employee_count += 1
+            instance.department.save()
+    
+    def decrement_employee_count(sender, instance, **kwargs):
+        instance.department.employee_count -= 1
+        instance.department.save()
+    
+    signals.post_save.connect(increment_employee_count, sender=Employee)
+    signals.post_delete.connect(decrement_employee_count, sender=Employee)
     
     
 Abstract custom queries in Manager methods.
