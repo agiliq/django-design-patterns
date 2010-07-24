@@ -40,7 +40,7 @@ code you could add custom methods to your default manager::
     
     class EventManager(models.Manager):
         def get_query_set(self):
-            return QuerySet(self.model, using=self._db) # note the `using` parameter, new in 1.2
+            return EventQuerySet(self.model, using=self._db) # note the `using` parameter, new in 1.2
         
         def published(self):
             return self.get_query_set().published()
