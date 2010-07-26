@@ -30,6 +30,7 @@ Chapters
    urls
    models
    views
+   forms
    templates
    workflow
    misc
