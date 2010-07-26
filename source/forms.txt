@@ -42,6 +42,25 @@ Or::
             super(ProfileForm, self).save(*args, **kwargs)
 
 
+Customizing widgets in ModelForm fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes you just need to override the widget of a field that's already on 
+your ModelForm. Instead of duplicating the field definition (with `help_text`, 
+`required`, `max_length`, etc). You can do this::
+ 
+    from django.contrib.admin.widgets import AdminFileWidget
+
+    class ProfileForm(forms.ModelForm):
+        class Meta:
+            model = Profile
+            exclude = 'user',
+    
+        def __init__(self, *args, **kwargs):
+            super(ProfileForm, self).__init__(*args, **kwargs)
+            # note that self.fields is available just after calling super's __init__
+            self.fields['picture'].widget = AdminFileWidget()
+
 
 Saving multiple Objects in one form
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
