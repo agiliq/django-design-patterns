@@ -119,3 +119,22 @@ Instead of::
                 
 The `.save()` should return a Model Object
 
+
+The form should what to do with it's data
+----------------------------------------
+
+If you're building a contact form, or something like this, the goal of your form is
+to send an email. So this logic should stay in the form::
+
+    class ContactForm(forms.Form):
+        subject = forms.CharField(...)
+        message = forms.TextField(...)
+        email = forms.EmailField(...)
+        ...
+        
+        def save(self):
+            mail_admins(self.cleaned_data['subject'], self.cleaned_data['message'])
+
+Note that i've used `save()`, and not `send()`, even when i'm not really saving anything. 
+This is just a convention, people prefer to use `save()` to keep the same interface to
+ModelForms. But it doesn't really matter, call it whatever you want.
