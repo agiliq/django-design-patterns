@@ -50,9 +50,9 @@ can take multiple criteria all of which are optional.::
     def advanced_search(request, criteria1=None, criteria2=None, criteria3=None):
         queryset = ModelClass.objects.all()
         if criteria1:
-            queryset.filter(critera1=critera1)
+            queryset = queryset.filter(critera1=critera1)
         if criteria2:
-            queryset.filter(critera2=critera2)
+            queryset = queryset.filter(critera2=critera2)
         if criteria3:
-            queryset.filter(critera3=critera3)
+            queryset = queryset.filter(critera3=critera3)
         return objects_list(request, queryset=queryset)
