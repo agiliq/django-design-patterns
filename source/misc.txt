@@ -31,6 +31,18 @@ Do::
     
     CURRENT_DIR = os.path.dirname(__file__)
     TEMPLATE_DIRS = os.path.join(CURRENT_DIR, 'template')
+    
+Apps should provide default values for settings they are trying to read.
+---------------------------------------------------------------------------
+As far as possible, apps should have defaults for settings they are trying to
+read. Instead of::
+
+    DEFAULT_SORT_UP = settings.DEFAULT_SORT_UP
+
+Use::
+
+    DEFAULT_SORT_UP = getattr(settings, 'DEFAULT_SORT_UP' , '&uarr;')
+
 
 
 Use templatetags when the output doesnot depend on the Request
