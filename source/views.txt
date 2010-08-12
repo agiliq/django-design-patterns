@@ -34,9 +34,9 @@ This keeps things grouped logically together. Eg.::
     def foo(request):
         form = FormClass()
         if request.method == 'POST':
-            #Handle post and form saving etv.
+            #Handle POST and form saving etc.
             #Redirect etc
-        #Any more get handling
+        #Any more GET handling
         payload = {'form': form, ...}
         return render_to_response(...)
 
