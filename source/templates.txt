@@ -1,5 +1,5 @@
 =================
-templates
+Templates
 =================
 
 Projects and apps.
@@ -41,7 +41,7 @@ templates should be physically located at either
 
 This allows two apps to have the same templates names.
 
-Hadling iterables which maybe empty
+Handling iterables which maybe empty
 -----------------------------------------
 
 In your view you do::
@@ -62,10 +62,4 @@ Now `posts` may be empty, so in template we do,::
     {% else %}
 
     {% endif %}
-
-
-
-
-
-
 
