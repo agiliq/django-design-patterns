@@ -45,15 +45,15 @@ Use::
 
 
 
-Use templatetags when the output doesnot depend on the Request
+Use templatetags when the output does not depend on the request
 -------------------------------------------------------------------
-In your sidebar suppose you want to show the 5 latest comments. You do not need
-the request to output this. Make it as a templatetag.
+In the sidebar, you want to show the 5 latest comments. You do not need
+the request to output this. Make it a templatetag.
 
 Import as if your apps are on your project path
 ----------------------------------------------------
 Instead of doing `from project.app.models import ModelClass` do `from app.models
-import ModelClass`. This makes you apps reusable  as they are not tied to a project.
+import ModelClass`. This makes you apps reusable as they are not tied to a project.
 
 Naming things
 -----------------
@@ -71,7 +71,7 @@ and not::
 Foreign key should use the name of the referenced class.::
 
     class Post(models.Model):
-            user = models.ForeignKey(User)
+        user = models.ForeignKey(User)
         
 Querysets should be plural, instances should be singular.::
 
@@ -83,21 +83,26 @@ Querysets should be plural, instances should be singular.::
     
 Using pdb remotely
 ------------------------
-Sometimes you will hit bugs which show up on servers but not on your local
+Sometimes you will hit bugs which show up on server but not on your local
 system. To handle these, you need to debug on the server. Doing `manage.py
 runserver` only allows local connections. To allow remote connections, use::
 
     python manage.py runserver 0.0.0.0:8000
     
+or::
+
+    python manage.py runserver 0:8000
+
+    
 So that your `pdb.set_trace()` which are on remote servers are hit when you access
-them from your local systems.
+them from your local system.
 
 Do not use primary keys in urls
 -----------------------------------
 If you use PK in urls you are giving away sensitive information, for example,
 the number of entries in your table. It also makes it trivial to guess other urls.
 
-If possible use Slugs in urls. This has the advantage of being both user and seo
+Use slugs in urls. This has the advantage of being both user and SEO
 friendly. 
     
 If slugs do not make sense, instead use a CRC algorithm.::
@@ -122,9 +127,9 @@ Have you handled all cases?
                                         #registration so this is safe.
             ...
             
-Or it is? What about users created via `manage.py createsuperuser`, with the
-above middleware, the default user can not even access the admin site.
+Or it is? What about users created via `manage.py createsuperuser`? With the
+above middleware, the default user can not access even the admin site.
 
 Hence handle all scenarios in middleware and context processors. This is one place
 where `try: .. except: ..` (bare except) blocks are acceptable. You do not want one
-middleare  bringing down the entire site.
+middleware  bringing down the entire site.
