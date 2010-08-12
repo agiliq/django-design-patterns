@@ -12,13 +12,13 @@ Some common scenarios
 Hiding some fields from ModelForm which are needed for a DB save.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Eg, you want too create a profile for the logged in user.::
+Eg, you want to create a profile for the logged in user.::
 
     #in Forms.py
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude =['user',]
+            exclude = ['user',]
             
     #In Views:
     form = ProfileForm(request.POST)
@@ -120,8 +120,8 @@ Instead of::
 The `.save()` should return a Model Object
 
 
-The form should what to do with it's data
-----------------------------------------
+The form should know what to do with it's data
+------------------------------------------------
 
 If you're building a contact form, or something like this, the goal of your form is
 to send an email. So this logic should stay in the form::
@@ -135,6 +135,6 @@ to send an email. So this logic should stay in the form::
         def save(self):
             mail_admins(self.cleaned_data['subject'], self.cleaned_data['message'])
 
-Note that i've used `save()`, and not `send()`, even when i'm not really saving anything. 
+I've used `save()`, and not `send()`, even when i'm not really saving anything. 
 This is just a convention, people prefer to use `save()` to keep the same interface to
 ModelForms. But it doesn't really matter, call it whatever you want.

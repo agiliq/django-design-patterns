@@ -156,7 +156,7 @@ to do that, we will need to pass user to the methods.::
         def set_name(self, user, value):
             self.created_by = user
             self.name = value
-            super(ItemSold, self).save()
+            self.save()
             
         ...
 
@@ -183,12 +183,12 @@ One way to do so would be to override, `save` and `delete`.::
     class Employee(models.Model):
         ...
         
-        def save(self):
+        def save(self, *args, **kwargs):
             if not self.id:
                 #this is a create, not an update
                 self.department.employee_count += 1
                 self.department.save()
-            super(Employee, self).save()
+            super(Employee, self).save(*args, **kwargs)
             
         def delete(self):
             self.department.employee_count -= 1
