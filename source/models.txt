@@ -61,8 +61,6 @@ Why do you need a custom QuerySet? To be able to chain method calls. Now that qu
 
     Event.objects.published().upcoming().order_by('start_date')
 
-
-
 Hierarchical Relationships
 ----------------------------
 You may want to model hierarchical relationships. The simplest way to do this is::
@@ -125,7 +123,7 @@ You have this representation at two places. You instead want to do::
 AuditFields
 ----------------
 
-Say you want to keep track of when was an object created and uodated. Create
+You want to keep track of when an object was created and updated. Create
 two DateTimeFields with `auto_now` and `auto_now_add`.::
 
     class ItemSold(models.Model):
@@ -168,8 +166,9 @@ Working with denormalised fields
 -----------------------------------
 
 Working with child tables.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Say you want to keep track of number of employees of a department.::
+You want to keep track of number of employees of a department.::
 
     class Department(models.Model):
         name = models.CharField(max_length = 100)
