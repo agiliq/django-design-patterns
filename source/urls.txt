@@ -51,4 +51,4 @@ as in `search_advanced_auth` and `search_advanced_unauth`.::
 References
 ----------------
 
-[#ref1] http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/urls.py#L23
+.. [#ref1] http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/urls.py#L23
