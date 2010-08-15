@@ -4,14 +4,14 @@ Views
 
 Generic views
 ------------------
-Use generic views where possible.
+Use generic views where possible. 
 
 Generic views are just functions
 ------------------------------------
 This means you can use them instead of calling say, `render_to_response`. For
 example, suppose you want to show a list of objects, so you would like to use
 `django.views.generic.object_list`. However, you also want to allow comments to
-be posted on these objects, which this generic view does not allow.::
+be posted on these objects, which this generic view does not allow. [#ref1]_ ::
 
     def object_list_comment(request):
         if request.method == 'POST':
@@ -29,7 +29,7 @@ be posted on these objects, which this generic view does not allow.::
 Handle GET and POST in same view function
 ----------------------------------------------
 
-This keeps things grouped logically together. Eg.::
+This keeps things grouped logically together. [#ref2]_ Eg.::
 
     def foo(request):
         form = FormClass()
@@ -56,3 +56,9 @@ can take multiple criteria all of which are optional.::
         if criteria3:
             queryset = queryset.filter(critera3=critera3)
         return objects_list(request, queryset=queryset)
+
+References
+----------------
+
+.. [#ref1] http://github.com/mightylemon/mightylemon/blob/ff916fec3099d0edab5ba7b07f4cf838ba6fec7b/apps/events/views.py
+.. [#ref2] http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/views.py#L65

@@ -30,7 +30,7 @@ prefix.::
 Naming urls
 ---------------
 
-Urlpatterns should be named. This is done as::
+Urlpatterns should be named. [#ref1]_ This is done as::
 
     url(r'^$', 'index', name='main_index'),
     
@@ -48,4 +48,7 @@ as in `search_advanced_auth` and `search_advanced_unauth`.::
     ...
     )
 
+References
+----------------
 
+[#ref1] http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/urls.py#L23
