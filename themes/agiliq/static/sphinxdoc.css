@@ -18,6 +18,27 @@ body.whatwedo { background:url(whatwedo_bg.gif) repeat-x; font:14px Arial, Helve
 
 #banner #whatwedographic{width:200px;  height:58px; float:left;  }
 
+#menu{width:600px; float:right; vertical-align:middle; display:block; height:108px;}
+
+#navigation{ width:582px; float:right; padding-top:25px;}
+#nav-example {background:url(../images/topmenu.png) no-repeat; width:582px; height:108px;margin:0;padding:0;}
+#nav-example span {display: none;}
+#nav-example li, #nav-example a { height:108px; display:block;}
+#nav-example li {float:left;list-style:none;display:inline;}
+#nav-example-01 {width: 74px;}
+#nav-example-02 {width: 115px;}
+#nav-example-03 {width: 111px;}
+#nav-example-04 {width: 101px;}
+#nav-example-05 {width: 110px;}
+#nav-example-06 {width: 71px;}
+
+#nav-example-01 a:hover {background:url(../images/topmenu.png) 0px -108px no-repeat;}
+#nav-example-02 a:hover {background:url(../images/topmenu.png) -74px -108px no-repeat;}
+#nav-example-03 a:hover {background:url(../images/topmenu.png) -189px -108px no-repeat;}
+#nav-example-04 a:hover {background:url(../images/topmenu.png) -300px -108px no-repeat;}
+#nav-example-05 a:hover {background:url(../images/topmenu.png) -401px -108px no-repeat;}
+#nav-example-06 a:hover {background:url(../images/topmenu.png) -511px -108px no-repeat;}
+
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
                  'Verdana', sans-serif;
