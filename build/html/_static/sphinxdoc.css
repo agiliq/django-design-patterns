@@ -14,9 +14,8 @@
 body.whatwedo { background:url(whatwedo_bg.gif) repeat-x; font:14px Arial, Helvetica, sans-serif; } 
 .whatwedo{background:url(../images/topmenu.png) -189px -108px no-repeat;}
 #banner{width:960px; margin:0px auto; height:108px; }
-#banner #title{width:600px;  height:108px; float:left; display:block; vertical-align:middle; display:table-cell; padding-top:20px; color:#fff; }
-
 #banner #whatwedographic{width:340px;  height:108px; float:left;  background:url(../images/whatwedo_graphic.png) no-repeat; background-position:bottom right;}
+#banner #title{width:600px;  height:108px; float:left; display:block; vertical-align:middle; display:table-cell; padding-top:20px; color:#fff; }
 
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
@@ -35,6 +34,7 @@ body {
 	margin:0px auto;
 }
 .wrap{width:960px; margin:0px auto;clear:both;}
+
 div.document {
     background-color: white;
     text-align: left;
@@ -43,7 +43,6 @@ div.document {
 
 div.bodywrapper {
     margin: 0 240px 0 0;
-    
 }
 
 div.body {
@@ -56,7 +55,6 @@ div.related {
 }
 
 div.related ul {
-
     height: 2em;
 
     border-bottom: 1px solid #ddd;
@@ -104,13 +102,13 @@ div.sphinxsidebar h3, div.sphinxsidebar h4 {
     color: white;
     border: 1px solid #86989B;
     background-color: #AFC1C4;*/
-	background-color:#F1F1F1; border-top:8px solid #7E4220; border-bottom:1px solid #dadada; padding:10px 20px 10px 20px; margin:0 0 10px 0px;
+	background-color:#F1F1F1;  border-top:8px solid #7E4220;  border-bottom:1px solid #dadada; padding:10px 20px 10px 20px; margin:0 0 10px 0px;
 	font-size: 1em;
 	color:#505050;
 }
 
 div.sphinxsidebar h3 a {
-    color: #505050;
+      color: #505050;
 }
 
 div.sphinxsidebar ul {
@@ -121,7 +119,6 @@ div.sphinxsidebar ul {
 	padding-left:10px;
 }
 .topless{padding-left:10px;}
-
 div.sphinxsidebar ul ul {
     margin-left: 20px;
 }
@@ -139,9 +136,9 @@ div.footer a {
     color: #86989B;
     text-decoration: underline;
 }*/
-div.footer{ clear:both;width:100%;  text-align:center; background-color:#EDEDED; margin:20px 0px 0px 0px; padding:20px 0px 20px 0px; font:12px Helvetica, Arial, sans-serif; color:#767676; text-decoration:none; line-height:35px; text-transform:uppercase; }
-div.footer a{ font:bold 14px Helvetica, Arial, sans-serif; color:#767676; text-decoration:none; line-height:35px; text-transform:uppercase; padding:0px 10px 0px 10px; }
-div.footer a:hover{ font:bold 14px Helvetica, Arial, sans-serif; color:#3A3A3A; text-decoration:none; line-height:35px; text-transform:uppercase; }
+div.footer{ clear:both;width:100%;  text-align:center; background-color:#EDEDED; margin:20px 0px 0px 0px; padding:20px 0px 20px 0px; font:12px Helvetica, Arial, sans-serif; color:#767676; text-decoration:none; line-height:35px;}
+div.footer a{ font:bold 14px Helvetica, Arial, sans-serif; color:#767676; text-decoration:none; line-height:35px; padding:0px 10px 0px 10px; }
+div.footer a:hover{ font:bold 14px Helvetica, Arial, sans-serif; color:#3A3A3A; text-decoration:none; line-height:35px; }
 
 /* -- body styles ----------------------------------------------------------- */
 
@@ -150,7 +147,7 @@ p {
 }
 
 a {
-      color: #7E4220;
+    color: #7E4220;
     text-decoration: none;
 }
 
@@ -164,19 +161,21 @@ div.body li a {
 div.body li a:hover {
     text-decoration: underline;
 }
+
 h1 {
     margin: 0;
     padding: 0.7em 0 0.3em 0;
     font-size: 1.5em;
-   color:#7E4220;
+    color:#7E4220;
 }
 
 h2 {
     margin: 1.3em 0 0.2em 0;
     font-size: 1em;
     padding: 0;
-	color:#7E4220;
+		color:#7E4220;
 	text-transform:uppercase;
+	font-family:Helvetica, Arial, Tahoma, Sans-serif;
 }
 
 h3 {

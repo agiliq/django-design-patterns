@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Workflow &mdash; Django Design Patterns</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Design Patterns" href="index.html" />
+    <link rel="next" title="Misc" href="misc.html" />
+    <link rel="prev" title="Templates" href="templates.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="misc.html" title="Misc"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="templates.html" title="Templates"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Workflow</a><ul>
+<li><a class="reference internal" href="#use-a-source-control-system">Use a source control system</a></li>
+<li><a class="reference internal" href="#use-a-bug-tracking-tool">Use a bug tracking tool.</a></li>
+<li><a class="reference internal" href="#use-a-schema-migration-tool">Use a schema migration tool</a></li>
+<li><a class="reference internal" href="#create-various-entries-in-your-etc-hosts-mapped-to-localhost">Create various entries in your /etc/hosts mapped to localhost</a></li>
+<li><a class="reference internal" href="#do-not-commit-the-generated-files">Do not commit the generated files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="templates.html"
+                        title="previous chapter">Templates</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="misc.html"
+                        title="next chapter">Misc</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/workflow.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="workflow">
+<h1>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="use-a-source-control-system">
+<h2>Use a source control system<a class="headerlink" href="#use-a-source-control-system" title="Permalink to this headline">¶</a></h2>
+<p>Use SVN, GIT, Hg whatever. But choose one and use it.</p>
+</div>
+<div class="section" id="use-a-bug-tracking-tool">
+<h2>Use a bug tracking tool.<a class="headerlink" href="#use-a-bug-tracking-tool" title="Permalink to this headline">¶</a></h2>
+<p>I recommend <a class="reference external" href="http://unfuddle.com/">Unfuddle</a>, (It has various niceties, above
+a source control and bug tracking tool).
+But others might work for you. In particular Trac is free.</p>
+</div>
+<div class="section" id="use-a-schema-migration-tool">
+<h2>Use a schema migration tool<a class="headerlink" href="#use-a-schema-migration-tool" title="Permalink to this headline">¶</a></h2>
+<p>There are various schema migration tools available. <a class="reference external" href="http://south.aeracode.org/">South</a> has emerged as the
+most used and supported tool.</p>
+</div>
+<div class="section" id="create-various-entries-in-your-etc-hosts-mapped-to-localhost">
+<h2>Create various entries in your /etc/hosts mapped to localhost<a class="headerlink" href="#create-various-entries-in-your-etc-hosts-mapped-to-localhost" title="Permalink to this headline">¶</a></h2>
+<p>While development you probably want multiple users logged in to the site
+simulataneously. For example, while developing, I have one user logged in the
+admin, one normal
+user using the site. If both try to access the site from localhost, one will be
+logged out when other logs in.</p>
+<p>If you have multiple entries mapped to localhost in /etc/hosts, you can use
+multiple users simulataneously logged in.</p>
+</div>
+<div class="section" id="do-not-commit-the-generated-files">
+<h2>Do not commit the generated files<a class="headerlink" href="#do-not-commit-the-generated-files" title="Permalink to this headline">¶</a></h2>
+<p>Django does not have a lot of auto generated files. However as you work with
+other django apps, you may come across auto generated files. These should not be
+checked in the the Django repository.
+For example, for this book, we checkin the source files and folder, but not the
+autogenerated build folders.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="misc.html" title="Misc"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="templates.html" title="Templates"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/embed.js"></script><noscript><a href="http://disqus.com/forums/uswaretechbooks/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+      &copy; Copyright 2009, Usware Technologies and Contributors.
+      Last updated on Oct 20, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-367368-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </body>
+</html>
