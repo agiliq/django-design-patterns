@@ -8,7 +8,17 @@
 @import url("basic.css");
 
 /* -- page layout ----------------------------------------------------------- */
+#header{width:960px; margin:0px auto; height:108px;}
+#logo{width:360px; float:left; vertical-align:middle; display:block; padding-top:35px; height:73px;}
+#menu{width:600px; float:right; vertical-align:middle; display:block; height:108px;}
 
+.whatwedo{background:url(../images/topmenu.png) -189px -108px no-repeat;}
+#banner{width:960px; margin:0px auto; height:318px; }
+#banner #title{width:620px;  height:238px; float:left; display:block; vertical-align:middle; display:table-cell; padding-top:80px;  }
+#banner #homegraphic{width:340px;  height:318px; float:left;  background:url(../images/home_graphic.png) no-repeat; background-position:bottom right;}
+#banner #whatwedographic{width:340px;  height:318px; float:left;  background:url(../images/whatwedo_graphic.png) no-repeat; background-position:bottom right;}
+#banner #ourworkgraphic{width:340px;  height:318px; float:left;  background:url(../images/ourwork_graphic.png) no-repeat; background-position:bottom right;}
+#banner #contactgraphic{width:340px;  height:318px; float:left;  background:url(../images/contact_graphic.png) no-repeat; background-position:bottom right;}
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
                  'Verdana', sans-serif;

@@ -80,7 +80,7 @@ pygments_style = 'sphinx'
 # Options for HTML output
 # -----------------------
 
-html_theme = "sphinxdoc2"
+html_theme = "agiliq"
 html_theme_path = ["../themes/"]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
