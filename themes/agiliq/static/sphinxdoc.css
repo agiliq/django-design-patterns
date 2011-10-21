@@ -13,10 +13,10 @@
 #menu{width:600px; float:right; vertical-align:middle; display:block; height:108px;}
 body.whatwedo { background:url(whatwedo_bg.gif) repeat-x; font:14px Arial, Helvetica, sans-serif; } 
 .whatwedo{background:url(../images/topmenu.png) -189px -108px no-repeat;}
-#banner{width:960px; margin:0px auto; height:108px; }
-#banner #title{width:600px;  height:108px; float:left; display:block; vertical-align:middle; display:table-cell; padding-top:20px; color:#fff; }
+#banner{width:960px; margin:0px auto; height:58px; }
+#banner #title{width:600px;  height:58px; float:left; display:block; vertical-align:middle; display:table-cell; color:#fff; }
 
-#banner #whatwedographic{width:340px;  height:108px; float:left;  background:url(../images/whatwedo_graphic.png) no-repeat; background-position:bottom right;}
+#banner #whatwedographic{width:200px;  height:58px; float:left;  }
 
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
@@ -341,4 +341,4 @@ div.versioninfo {
     line-height: 1.3em;
     font-size: 0.9em;
 }
-.white{color:#FECF57; font-size:24px; padding-top:30px;text-transform:uppercase; text-align:left; padding-left:15px;}
+.white{color:#FECF57; font-size:24px; padding-top:10px;text-transform:uppercase; text-align:left; padding-left:15px;}
