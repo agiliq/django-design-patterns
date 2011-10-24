@@ -43,7 +43,7 @@ Or::
 
 
 Customizing widgets in ModelForm fields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sometimes you just need to override the widget of a field that's already on 
 your ModelForm. Instead of duplicating the field definition (with `help_text`, 
