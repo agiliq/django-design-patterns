@@ -159,7 +159,7 @@ htmlhelp_basename = 'Djangodesignpatternsdoc'
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
   ('contents', 'Djangodesignpatterns.tex', u'Django design patterns Documentation',
-   u'Usware Technologies and Contributors', 'manual'),
+   u'Agiliq and Contributors', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
