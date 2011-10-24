@@ -118,15 +118,18 @@ If slugs do not make sense, instead use a CRC algorithm.::
 
 Code defensively in middleware and context processors.
 -----------------------------------------------------------
+
 Your middleware and context processors are going to be run for **all** requests.
 Have you handled all cases?
 
     def process_request(request):
         if user.is_authenticated():
-            profile = request.user.get_profile()#Hah, I create profiles during
-                                        #registration so this is safe.
+            profile = request.user.get_profile()
+            # Hah, I create profiles during
+            # registration so this is safe.
             ...
-            
+
+
 Or it is? What about users created via `manage.py createsuperuser`? With the
 above middleware, the default user can not access even the admin site.
 
