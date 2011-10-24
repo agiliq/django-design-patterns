@@ -321,3 +321,5 @@ div.versioninfo {
     line-height: 1.3em;
     font-size: 0.9em;
 }
+.white{color:#FECF57; font-size:24px;text-transform:uppercase; text-align:left; padding-left:15px;padding-top:0px;}
+body.whatwedo { background:url(whatwedo_bg.png) repeat-x; font:14px Arial, Helvetica, sans-serif; } 

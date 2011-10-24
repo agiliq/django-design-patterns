@@ -1,0 +1,312 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Forms &mdash; Django Design Patterns</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Design Patterns" href="index.html" />
+    <link rel="next" title="Templates" href="templates.html" />
+    <link rel="prev" title="Views" href="views.html" /> 
+  </head>
+  <body class="whatwedo">
+
+<div class="wrap">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="templates.html" title="Templates"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="views.html" title="Views"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div></div>
+<div id="header">
+    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS"  border="0"></a></div>
+    <div id="menu">
+      <ul id="nav-example">
+        <li  id="nav-example-01"> <a href="index.html" ><span>Home</span></a> </li>
+        <li id="nav-example-02"> <a href="whoweare.html"><span>Who we are</span></a> </li>
+        <li id="nav-example-03"> <a href="whatwedo.html" class="whatwedo"><span>What we do</span></a> </li>
+        <li id="nav-example-04"> <a href="ourwork.html"><span>Our work</span></a> </li>
+        <li id="nav-example-05"> <a href="contactus.html"><span>Contact us</span></a> </li>
+        <li id="nav-example-06" ><a href="http://uswaretech.com/blog/" target="_blank"><span>Blog</span></a></li>
+      </ul>
+    </div>
+</div>
+<!--HEADER ENDS HERE-->
+<!--BANNER STARTS HERE-->
+<div id="banner">
+    <div id="title">
+        <h1 class="white">Agiliq books </h1>
+    </div>
+    <div id="whatwedographic"></div>
+</div>
+<!--BANNER ENDS HERE-->
+<div class="wrap">
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Forms</a><ul>
+<li><a class="reference internal" href="#prefer-modelform-to-form">Prefer ModelForm to Form</a><ul>
+<li><a class="reference internal" href="#hiding-some-fields-from-modelform-which-are-needed-for-a-db-save">Hiding some fields from ModelForm which are needed for a DB save.</a></li>
+<li><a class="reference internal" href="#customizing-widgets-in-modelform-fields">Customizing widgets in ModelForm fields</a></li>
+<li><a class="reference internal" href="#saving-multiple-objects-in-one-form">Saving multiple Objects in one form</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forms-should-know-how-to-save-themselves">Forms should know how to save themselves.</a></li>
+<li><a class="reference internal" href="#the-form-should-know-what-to-do-with-it-s-data">The form should know what to do with it&#8217;s data</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="views.html"
+                        title="previous chapter">Views</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="templates.html"
+                        title="next chapter">Templates</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/forms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="forms">
+<h1>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prefer-modelform-to-form">
+<h2>Prefer ModelForm to Form<a class="headerlink" href="#prefer-modelform-to-form" title="Permalink to this headline">¶</a></h2>
+<p>ModelForm already know the correct UI widgets for your underlying Models. In
+most of the cases ModelForm would suffice instead of Forms.</p>
+<p>Some common scenarios</p>
+<div class="section" id="hiding-some-fields-from-modelform-which-are-needed-for-a-db-save">
+<h3>Hiding some fields from ModelForm which are needed for a DB save.<a class="headerlink" href="#hiding-some-fields-from-modelform-which-are-needed-for-a-db-save" title="Permalink to this headline">¶</a></h3>
+<p>Eg, you want to create a profile for the logged in user.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#in Forms.py</span>
+<span class="k">class</span> <span class="nc">ProfileForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Profile</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">,]</span>
+
+<span class="c">#In Views:</span>
+<span class="n">form</span> <span class="o">=</span> <span class="n">ProfileForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+<span class="n">profile</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-python"><pre>#Todo test this
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude =['user',]
+    def __init__(self, user, *args, **kwargs)
+        self.user = user
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+    def save(*args, **kwargs):
+        self.instance.user = self.user
+        super(ProfileForm, self).save(*args, **kwargs)</pre>
+</div>
+</div>
+<div class="section" id="customizing-widgets-in-modelform-fields">
+<h3>Customizing widgets in ModelForm fields<a class="headerlink" href="#customizing-widgets-in-modelform-fields" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you just need to override the widget of a field that&#8217;s already on
+your ModelForm. Instead of duplicating the field definition (with <cite>help_text</cite>,
+<cite>required</cite>, <cite>max_length</cite>, etc). You can do this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.contrib.admin.widgets</span> <span class="kn">import</span> <span class="n">AdminFileWidget</span>
+
+<span class="k">class</span> <span class="nc">ProfileForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Profile</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ProfileForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c"># note that self.fields is available just after calling super&#39;s __init__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;picture&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">AdminFileWidget</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-multiple-objects-in-one-form">
+<h3>Saving multiple Objects in one form<a class="headerlink" href="#saving-multiple-objects-in-one-form" title="Permalink to this headline">¶</a></h3>
+<p>As:</p>
+<div class="highlight-python"><pre>class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user',]
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = [...]
+
+#in views.py
+userform = UserForm(request.POST)
+profileform =  ProfileForm(request.POST)
+if userform.is_valid() and profileform.is_valid():
+    #Only if both are valid together
+    user = userform.save()
+    profile = profileform.save(commit = False)
+    profile.user = user
+    profile.save()
+
+{# In templates #}
+&lt;form ...&gt;
+{{ userform }}
+{{ profileform }}
+&lt;input type="submit" /&gt;
+&lt;/form&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="forms-should-know-how-to-save-themselves">
+<h2>Forms should know how to save themselves.<a class="headerlink" href="#forms-should-know-how-to-save-themselves" title="Permalink to this headline">¶</a></h2>
+<p>if your forms is a forms.ModelForm, it already knows how to save its data. If you
+write a forms.Form, it should have a <cite>.save()</cite>. This keeps things symmetrical with
+<cite>ModelForms</cite>, and allows you to do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#in views.py</span>
+<span class="k">def</span> <span class="nf">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span>  <span class="o">=</span> <span class="n">FormClass</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="o">...</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Instead of:</p>
+<div class="highlight-python"><pre>if form.is_valid():
+    #handle the saving in DB inside of views.</pre>
+</div>
+<p>The <cite>.save()</cite> should return a Model Object</p>
+</div>
+<div class="section" id="the-form-should-know-what-to-do-with-it-s-data">
+<h2>The form should know what to do with it&#8217;s data<a class="headerlink" href="#the-form-should-know-what-to-do-with-it-s-data" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re building a contact form, or something like this, the goal of your form is
+to send an email. So this logic should stay in the form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ContactForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">mail_admins</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;subject&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>I&#8217;ve used <cite>save()</cite>, and not <cite>send()</cite>, even when i&#8217;m not really saving anything.
+This is just a convention, people prefer to use <cite>save()</cite> to keep the same interface to
+ModelForms. But it doesn&#8217;t really matter, call it whatever you want.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="templates.html" title="Templates"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="views.html" title="Views"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+</div>
+
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/embed.js"></script><noscript><a href="http://disqus.com/forums/uswaretechbooks/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+      &copy; Copyright 2011, Agiliq.
+      Last updated on Oct 24, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-367368-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </body>
+</html>

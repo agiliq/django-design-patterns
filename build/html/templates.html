@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Templates &mdash; Django Design Patterns</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Design Patterns" href="index.html" />
+    <link rel="next" title="Workflow" href="workflow.html" />
+    <link rel="prev" title="Forms" href="forms.html" /> 
+  </head>
+  <body class="whatwedo">
+
+<div class="wrap">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div></div>
+<div id="header">
+    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS"  border="0"></a></div>
+    <div id="menu">
+      <ul id="nav-example">
+        <li  id="nav-example-01"> <a href="index.html" ><span>Home</span></a> </li>
+        <li id="nav-example-02"> <a href="whoweare.html"><span>Who we are</span></a> </li>
+        <li id="nav-example-03"> <a href="whatwedo.html" class="whatwedo"><span>What we do</span></a> </li>
+        <li id="nav-example-04"> <a href="ourwork.html"><span>Our work</span></a> </li>
+        <li id="nav-example-05"> <a href="contactus.html"><span>Contact us</span></a> </li>
+        <li id="nav-example-06" ><a href="http://uswaretech.com/blog/" target="_blank"><span>Blog</span></a></li>
+      </ul>
+    </div>
+</div>
+<!--HEADER ENDS HERE-->
+<!--BANNER STARTS HERE-->
+<div id="banner">
+    <div id="title">
+        <h1 class="white">Agiliq books </h1>
+    </div>
+    <div id="whatwedographic"></div>
+</div>
+<!--BANNER ENDS HERE-->
+<div class="wrap">
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Templates</a><ul>
+<li><a class="reference internal" href="#projects-and-apps">Projects and apps.</a></li>
+<li><a class="reference internal" href="#location-of-templates">Location of templates</a></li>
+<li><a class="reference internal" href="#handling-iterables-which-maybe-empty">Handling iterables which maybe empty</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="forms.html"
+                        title="previous chapter">Forms</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="workflow.html"
+                        title="next chapter">Workflow</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/templates.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="templates">
+<h1>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="projects-and-apps">
+<h2>Projects and apps.<a class="headerlink" href="#projects-and-apps" title="Permalink to this headline">¶</a></h2>
+<p>There should be one base.html at the project level, and one <cite>base.html</cite> at each of
+the app levels. The app level <cite>base.html</cite> should extend the project level
+<cite>base.html</cite>.:</p>
+<div class="highlight-python"><pre>{# Eg Project base.html #}
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;{% block title %}My Super project{% endblock %}&lt;/title&gt;
+...
+
+{# app base.html #}
+
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} - My duper app {% endblock %}
+...
+
+
+{# login.html #}
+
+{% extends 'auth/base.html' %}
+{% block title %}{{ block.super }} - Login {% endblock %}
+...</pre>
+</div>
+</div>
+<div class="section" id="location-of-templates">
+<h2>Location of templates<a class="headerlink" href="#location-of-templates" title="Permalink to this headline">¶</a></h2>
+<p>The templates for an app should be available as <cite>appname/template.html</cite>. So the
+templates should be physically located at either</p>
+<ol class="arabic simple">
+<li>project/templates/app/template.html</li>
+<li>project/app/templates/app/template.html</li>
+</ol>
+<p>This allows two apps to have the same templates names.</p>
+</div>
+<div class="section" id="handling-iterables-which-maybe-empty">
+<h2>Handling iterables which maybe empty<a class="headerlink" href="#handling-iterables-which-maybe-empty" title="Permalink to this headline">¶</a></h2>
+<p>In your view you do:</p>
+<div class="highlight-python"><pre>posts = BlogPosts.objects.all()
+...
+payload = {'posts':posts}
+return render_to_response('blog/posts.html', payload, ..)</pre>
+</div>
+<p>Now <cite>posts</cite> may be empty, so in template we do,:</p>
+<div class="highlight-python"><pre>{% if posts %}
+    {% for post in posts %}
+        ...
+{% endfor %}
+
+
+{% else %}
+
+{% endif %}</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+</div>
+
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/embed.js"></script><noscript><a href="http://disqus.com/forums/uswaretechbooks/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+      &copy; Copyright 2011, Agiliq.
+      Last updated on Oct 24, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-367368-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </body>
+</html>

@@ -155,11 +155,11 @@
   <body class="whatwedo">
 {%- block header %}{% endblock %}
 
-{%- block relbar1 %}{{ relbar() }}{% endblock %}
+<div class="wrap">{%- block relbar1 %}{{ relbar() }}{% endblock %}</div>
 
 {%- block content %}
 <div id="header">
-    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS" width="264" height="31" border="0"></a></div>
+    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS"  border="0"></a></div>
     <div id="menu">
       <ul id="nav-example">
         <li  id="nav-example-01"> <a href="index.html" ><span>Home</span></a> </li>
@@ -180,6 +180,7 @@
     <div id="whatwedographic"></div>
 </div>
 <!--BANNER ENDS HERE-->
+<div class="wrap">
   {%- block sidebar1 %} {# possible location for sidebar #} {% endblock %}
 
     <div class="document">
@@ -200,10 +201,11 @@
   {%- block sidebar2 %}{{ sidebar() }}{% endblock %}
       <div class="clearer"></div>
     </div>
+	
 {%- endblock %}
 
 {%- block relbar2 %}{{ relbar() }}{% endblock %}
-
+</div>
 {%- block footer %}
     <div class="footer">
     {%- if show_copyright %}

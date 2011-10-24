@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Views &mdash; Django Design Patterns</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Design Patterns" href="index.html" />
+    <link rel="next" title="Forms" href="forms.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+  </head>
+  <body class="whatwedo">
+
+<div class="wrap">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div></div>
+<div id="header">
+    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS"  border="0"></a></div>
+    <div id="menu">
+      <ul id="nav-example">
+        <li  id="nav-example-01"> <a href="index.html" ><span>Home</span></a> </li>
+        <li id="nav-example-02"> <a href="whoweare.html"><span>Who we are</span></a> </li>
+        <li id="nav-example-03"> <a href="whatwedo.html" class="whatwedo"><span>What we do</span></a> </li>
+        <li id="nav-example-04"> <a href="ourwork.html"><span>Our work</span></a> </li>
+        <li id="nav-example-05"> <a href="contactus.html"><span>Contact us</span></a> </li>
+        <li id="nav-example-06" ><a href="http://uswaretech.com/blog/" target="_blank"><span>Blog</span></a></li>
+      </ul>
+    </div>
+</div>
+<!--HEADER ENDS HERE-->
+<!--BANNER STARTS HERE-->
+<div id="banner">
+    <div id="title">
+        <h1 class="white">Agiliq books </h1>
+    </div>
+    <div id="whatwedographic"></div>
+</div>
+<!--BANNER ENDS HERE-->
+<div class="wrap">
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Views</a><ul>
+<li><a class="reference internal" href="#generic-views">Generic views</a></li>
+<li><a class="reference internal" href="#generic-views-are-just-functions">Generic views are just functions</a></li>
+<li><a class="reference internal" href="#handle-get-and-post-in-same-view-function">Handle GET and POST in same view function</a></li>
+<li><a class="reference internal" href="#querysets-are-chainable-and-lazy">Querysets are chainable and lazy</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="previous chapter">Models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="forms.html"
+                        title="next chapter">Forms</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/views.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="views">
+<h1>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generic-views">
+<h2>Generic views<a class="headerlink" href="#generic-views" title="Permalink to this headline">¶</a></h2>
+<p>Use generic views where possible.</p>
+</div>
+<div class="section" id="generic-views-are-just-functions">
+<h2>Generic views are just functions<a class="headerlink" href="#generic-views-are-just-functions" title="Permalink to this headline">¶</a></h2>
+<p>This means you can use them instead of calling say, <cite>render_to_response</cite>. For
+example, suppose you want to show a list of objects, so you would like to use
+<cite>django.views.generic.object_list</cite>. However, you also want to allow comments to
+be posted on these objects, which this generic view does not allow. <a class="footnote-reference" href="#ref1" id="id1">[1]</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">object_list_comment</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CommentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="o">...</span>
+            <span class="c">#redirect</span>
+    <span class="c">#Handle get or invalid form Post</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">ModelClass</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">object_list</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">extra_context</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handle-get-and-post-in-same-view-function">
+<h2>Handle GET and POST in same view function<a class="headerlink" href="#handle-get-and-post-in-same-view-function" title="Permalink to this headline">¶</a></h2>
+<p>This keeps things grouped logically together. <a class="footnote-reference" href="#ref2" id="id2">[2]</a> Eg.:</p>
+<div class="highlight-python"><pre>def foo(request):
+    form = FormClass()
+    if request.method == 'POST':
+        #Handle POST and form saving etc.
+        #Redirect etc
+    #Any more GET handling
+    payload = {'form': form, ...}
+    return render_to_response(...)</pre>
+</div>
+</div>
+<div class="section" id="querysets-are-chainable-and-lazy">
+<h2>Querysets are chainable and lazy<a class="headerlink" href="#querysets-are-chainable-and-lazy" title="Permalink to this headline">¶</a></h2>
+<p>This means that your view can keep on creating querysets and they would be
+evaluated only when used. Suppose you have an advanced search view which
+can take multiple criteria all of which are optional.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">advanced_search</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">criteria1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">criteria2</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">criteria3</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">ModelClass</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">criteria1</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">critera1</span><span class="o">=</span><span class="n">critera1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">criteria2</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">critera2</span><span class="o">=</span><span class="n">critera2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">criteria3</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">critera3</span><span class="o">=</span><span class="n">critera3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">objects_list</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">queryset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="ref1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://github.com/mightylemon/mightylemon/blob/ff916fec3099d0edab5ba7b07f4cf838ba6fec7b/apps/events/views.py">http://github.com/mightylemon/mightylemon/blob/ff916fec3099d0edab5ba7b07f4cf838ba6fec7b/apps/events/views.py</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="ref2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/views.py#L65">http://github.com/agiliq/django-blogango/blob/9525dfa621ca54219eed0c0e9c1624de89948045/blogango/views.py#L65</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+</div>
+
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/embed.js"></script><noscript><a href="http://disqus.com/forums/uswaretechbooks/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+      &copy; Copyright 2011, Agiliq.
+      Last updated on Oct 24, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-367368-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </body>
+</html>

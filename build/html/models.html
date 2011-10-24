@@ -1,0 +1,404 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Models &mdash; Django Design Patterns</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Design Patterns" href="index.html" />
+    <link rel="next" title="Views" href="views.html" />
+    <link rel="prev" title="Urls" href="urls.html" /> 
+  </head>
+  <body class="whatwedo">
+
+<div class="wrap">
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="views.html" title="Views"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="urls.html" title="Urls"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div></div>
+<div id="header">
+    <div id="logo"><a href="index.html"><img src="_static/agiliq_logo.png" alt="AGILIQ SOLUTIONS"  border="0"></a></div>
+    <div id="menu">
+      <ul id="nav-example">
+        <li  id="nav-example-01"> <a href="index.html" ><span>Home</span></a> </li>
+        <li id="nav-example-02"> <a href="whoweare.html"><span>Who we are</span></a> </li>
+        <li id="nav-example-03"> <a href="whatwedo.html" class="whatwedo"><span>What we do</span></a> </li>
+        <li id="nav-example-04"> <a href="ourwork.html"><span>Our work</span></a> </li>
+        <li id="nav-example-05"> <a href="contactus.html"><span>Contact us</span></a> </li>
+        <li id="nav-example-06" ><a href="http://uswaretech.com/blog/" target="_blank"><span>Blog</span></a></li>
+      </ul>
+    </div>
+</div>
+<!--HEADER ENDS HERE-->
+<!--BANNER STARTS HERE-->
+<div id="banner">
+    <div id="title">
+        <h1 class="white">Agiliq books </h1>
+    </div>
+    <div id="whatwedographic"></div>
+</div>
+<!--BANNER ENDS HERE-->
+<div class="wrap">
+
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#multiple-managers">Multiple managers</a></li>
+<li><a class="reference internal" href="#custom-manager-methods">Custom Manager Methods</a></li>
+<li><a class="reference internal" href="#hierarchical-relationships">Hierarchical Relationships</a></li>
+<li><a class="reference internal" href="#singleton-classes">Singleton classes</a></li>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#audit-trail-and-rollback">Audit Trail and rollback</a></li>
+<li><a class="reference internal" href="#define-an-unicode">Define an __unicode___</a></li>
+<li><a class="reference internal" href="#define-a-get-absolute-url">Define a get_absolute_url()</a></li>
+<li><a class="reference internal" href="#use-permalink-for-calculating-get-absolute-url">Use &#64;permalink for calculating get_absolute_url</a></li>
+<li><a class="reference internal" href="#auditfields">AuditFields</a></li>
+<li><a class="reference internal" href="#working-with-denormalised-fields">Working with denormalised fields</a><ul>
+<li><a class="reference internal" href="#working-with-child-tables">Working with child tables.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#abstract-custom-queries-in-manager-methods">Abstract custom queries in Manager methods.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="urls.html"
+                        title="previous chapter">Urls</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="views.html"
+                        title="next chapter">Views</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/models.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="multiple-managers">
+<h2>Multiple managers<a class="headerlink" href="#multiple-managers" title="Permalink to this headline">¶</a></h2>
+<p>A Model class can have multiple managers, depending upon your needs. Suppose you
+do not want to display any object on your site which is unapproved(is_approved =
+False in your Model).:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ModelClassApprovedOnlyManager</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_query_set</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_query_set</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_approved</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ModelClass</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">is_approved</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">all_objects</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">ModelClassApprovedOnlyManager</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you use multiple managers, the first manager should be the default manager. This is as the first
+manager is accesible as <cite>ModelClass._default_manager</cite>, which is used by admin to get all objects.</p>
+</div>
+<div class="section" id="custom-manager-methods">
+<h2>Custom Manager Methods<a class="headerlink" href="#custom-manager-methods" title="Permalink to this headline">¶</a></h2>
+<p>Imagine you have a query like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s">&#39;P&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">start_date__gte</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;start_date&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>you probably will need to filter by status and created date again, to avoid duplicating
+code you could add custom methods to your default manager:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">EventQuerySet</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">QuerySet</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">published</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_published</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">upcoming</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">start_date__gte</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+<span class="k">class</span> <span class="nc">EventManager</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_query_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">EventQuerySet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">using</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="p">)</span> <span class="c"># note the `using` parameter, new in 1.2</span>
+
+    <span class="k">def</span> <span class="nf">published</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_query_set</span><span class="p">()</span><span class="o">.</span><span class="n">published</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">upcoming</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_query_set</span><span class="p">()</span><span class="o">.</span><span class="n">upcoming</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">is_published</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
+    <span class="o">...</span>
+
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">()</span>    <span class="c"># override the default manager</span>
+</pre></div>
+</div>
+<p>This way you keep your logic in your model.
+Why do you need a custom QuerySet? To be able to chain method calls. Now that query could be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">published</span><span class="p">()</span><span class="o">.</span><span class="n">upcoming</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;start_date&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hierarchical-relationships">
+<h2>Hierarchical Relationships<a class="headerlink" href="#hierarchical-relationships" title="Permalink to this headline">¶</a></h2>
+<p>You may want to model hierarchical relationships. The simplest way to do this is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ModelClass</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;ModelClass&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is called adjacency list model, and is very inefficient for large trees. If your
+trees are very shallow you can use this. Otherwise you want to use a more
+efficient but complex modeling called MPTT. Fortunately, you can just use django-mptt.</p>
+</div>
+<div class="section" id="singleton-classes">
+<h2>Singleton classes<a class="headerlink" href="#singleton-classes" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you want to make sure that only one Object of a Model can be created.</p>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>To make sure, when an object is create/edited/deleted, there is a log.</p>
+</div>
+<div class="section" id="audit-trail-and-rollback">
+<h2>Audit Trail and rollback<a class="headerlink" href="#audit-trail-and-rollback" title="Permalink to this headline">¶</a></h2>
+<p>When an object is modified or deleted, to be able to go back to the previous
+version.</p>
+</div>
+<div class="section" id="define-an-unicode">
+<h2>Define an __unicode___<a class="headerlink" href="#define-an-unicode" title="Permalink to this headline">¶</a></h2>
+<p>Until you define an <cite>__unicode__</cite> for your ModelClass, in Admin and at various
+other places you will get an <cite>&lt;ModelClass object&gt;</cite> where the object needs to be
+displayed. Define a meaningful <cite>__unicode__</cite> for you ModelClass, to get
+meaningful display. Once you define <cite>__unicode__</cite>, you do not need to define
+<cite>__str__</cite>.</p>
+</div>
+<div class="section" id="define-a-get-absolute-url">
+<h2>Define a get_absolute_url()<a class="headerlink" href="#define-a-get-absolute-url" title="Permalink to this headline">¶</a></h2>
+<p><cite>get_absolute_url</cite> is used at various places by Django. (In Admin for &#8220;view on
+site&#8221; option, and in feeds framework).</p>
+</div>
+<div class="section" id="use-permalink-for-calculating-get-absolute-url">
+<h2>Use &#64;permalink for calculating get_absolute_url<a class="headerlink" href="#use-permalink-for-calculating-get-absolute-url" title="Permalink to this headline">¶</a></h2>
+<p>You want only one canonical representation of your urls. This should be in urls.py</p>
+<p>If you write a class like:</p>
+<div class="highlight-python"><pre>class Customer(models.Model)
+    ...
+
+    def get_absolute_url(self):
+        return /customer/%s/ % self.slug</pre>
+</div>
+<p>You have this representation at two places. You instead want to do:</p>
+<div class="highlight-python"><pre>class Customer(models.Model)
+    ...
+
+    @permalink
+    def get_absolute_url(self):
+        return ('customers.detail', self.slug)</pre>
+</div>
+</div>
+<div class="section" id="auditfields">
+<h2>AuditFields<a class="headerlink" href="#auditfields" title="Permalink to this headline">¶</a></h2>
+<p>You want to keep track of when an object was created and updated. Create
+two DateTimeFields with <cite>auto_now</cite> and <cite>auto_now_add</cite>.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ItemSold</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">()</span>
+    <span class="o">...</span>
+    <span class="c">#Audit field</span>
+    <span class="n">created_on</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">updated_on</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you want, created_by and updated_by. This is possible using the
+threadlocals(<a class="reference external" href="http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser">http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser</a>)
+technique, but since we [do not want](<a class="reference external" href="http://www.b-list.org/weblog/2008/dec/24/admin/">http://www.b-list.org/weblog/2008/dec/24/admin/</a>)
+to do that, we will need to pass user to the methods.:</p>
+<div class="highlight-python"><pre>class ItemSold(models.Manager):
+    def create_item_sold(self, user, ...):
+
+
+class ItemSold(models.Model):
+    name = models.CharField(max_length = 100)
+    value = models.PositiveIntegerField()
+    ...
+    #Audit field
+    created_on = models.DateTimeField(auto_now_add = True)
+    updated_on = models.DateTimeField(auto_now = True)
+    created_by = models.ForeignKey(User, ...)
+    updated_by = models.ForeignKey(User, ...)
+
+    def set_name(self, user, value):
+        self.created_by = user
+        self.name = value
+        self.save()
+
+    ...
+
+objects = ItemSoldManager()</pre>
+</div>
+</div>
+<div class="section" id="working-with-denormalised-fields">
+<h2>Working with denormalised fields<a class="headerlink" href="#working-with-denormalised-fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="working-with-child-tables">
+<h3>Working with child tables.<a class="headerlink" href="#working-with-child-tables" title="Permalink to this headline">¶</a></h3>
+<p>You want to keep track of number of employees of a department.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Department</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">employee_count</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">department</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Department</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One way to do so would be to override, <cite>save</cite> and <cite>delete</cite>.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="c">#this is a create, not an update</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">employee_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">employee_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Other option would be to attach listeners for <cite>post_save</cite> and <cite>post_delete</cite>.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">signals</span>
+
+<span class="k">def</span> <span class="nf">increment_employee_count</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">created</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">created</span><span class="p">:</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">employee_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">decrement_employee_count</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">employee_count</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="n">signals</span><span class="o">.</span><span class="n">post_save</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">increment_employee_count</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">Employee</span><span class="p">)</span>
+<span class="n">signals</span><span class="o">.</span><span class="n">post_delete</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">decrement_employee_count</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">Employee</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="abstract-custom-queries-in-manager-methods">
+<h2>Abstract custom queries in Manager methods.<a class="headerlink" href="#abstract-custom-queries-in-manager-methods" title="Permalink to this headline">¶</a></h2>
+<p>If you have some complex Sql query, not easily representable via Django ORM,
+you can write custom Sql. These should be abstracted as Manager methods.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="views.html" title="Views"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="urls.html" title="Urls"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Design Patterns</a> &raquo;</li> 
+      </ul>
+    </div>
+</div>
+
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/embed.js"></script><noscript><a href="http://disqus.com/forums/uswaretechbooks/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="footer">
+      &copy; Copyright 2011, Agiliq.
+      Last updated on Oct 24, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/uswaretechbooks/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-367368-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </body>
+</html>

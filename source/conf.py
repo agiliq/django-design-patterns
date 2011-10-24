@@ -36,7 +36,7 @@ master_doc = 'index'
 
 # General substitutions.
 project = u'Django design patterns'
-copyright = u'2009, Usware Technologies and Contributors'
+copyright = u'2011, Agiliq'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
