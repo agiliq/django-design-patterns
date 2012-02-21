@@ -20,7 +20,7 @@ False in your Model).::
         objects = ModelClassApprovedOnlyManager()
         
 If you use multiple managers, the first manager should be the default manager. This is as the first
-manager is accesible as `ModelClass._default_manager`, which is used by admin to get all objects.
+manager is accessible as `ModelClass._default_manager`, which is used by admin to get all objects.
 
 Custom Manager Methods
 ----------------------
