@@ -139,7 +139,7 @@ threadlocals(http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser)
 technique, but since we [do not want](http://www.b-list.org/weblog/2008/dec/24/admin/)
 to do that, we will need to pass user to the methods.::
 
-    class ItemSold(models.Manager):
+    class ItemSoldManager(models.Manager):
         def create_item_sold(self, user, ...):
             
 
