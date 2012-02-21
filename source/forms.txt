@@ -99,7 +99,8 @@ As::
     
 Forms should know how to save themselves.
 ---------------------------------------------
-if your forms is a forms.ModelForm, it already knows how to save its data. If you
+
+If your forms is a `forms.ModelForm`, it already knows how to save its data. If you
 write a forms.Form, it should have a `.save()`. This keeps things symmetrical with
 `ModelForms`, and allows you to do::
 
