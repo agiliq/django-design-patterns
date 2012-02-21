@@ -89,11 +89,6 @@ runserver` only allows local connections. To allow remote connections, use::
 
     python manage.py runserver 0.0.0.0:8000
     
-or::
-
-    python manage.py runserver 0:8000
-
-    
 So that your `pdb.set_trace()` which are on remote servers are hit when you access
 them from your local system.
 
