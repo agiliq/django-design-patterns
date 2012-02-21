@@ -9,8 +9,8 @@ do not want to display any object on your site which is unapproved(is_approved =
 False in your Model).::
 
     class ModelClassApprovedOnlyManager(models.Manager):
-        def get_query_set():
-            self.get_query_set().filter(is_approved = True)
+        def get_query_set(*args, **kwargs):
+            return super(ModelClassApprovedOnlyManager, self).get_query_set(*args, **kwargs).filter(is_approved = True)
     
     class ModelClass(models.Model):
         ...
