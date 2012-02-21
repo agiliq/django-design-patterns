@@ -12,7 +12,7 @@ Getting the docs
 ----------------------
 The documents are generated using `Sphinx <http://sphinx.pocoo.org/>`_. The code
 is available on `Github <http://github.com/agiliq/django-design-patterns/tree/master>`_.
-The generated Html is available on http://uswaretech.com/books/djangodesignpatterns/
+The generated Html is available on http://agiliq.com/books/djangodesignpatterns/
 
 To generate the docs, do `make html` within the top level folder of repo.
 
