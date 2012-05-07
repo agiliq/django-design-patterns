@@ -6,7 +6,7 @@ Prerequisites
 ------------------
 
 1. You know Python. If you do not, try `Dive into Python <http://diveintopython.org/>`_
-2. You know Django. You work with Django 1.4+. If you do not please read `Django Docs<https://docs.djangoproject.com/>`_
+2. You know Django. You work with Django 1.4+. If you do not please read `Django Docs <https://docs.djangoproject.com/>`_
 
 Getting the docs
 ----------------------
