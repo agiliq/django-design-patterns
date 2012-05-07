@@ -38,7 +38,7 @@ This enables calling `{% url urlpatternname %}` much easier.
 
 The pattern name should be of the form `appname_viewname`. If the same view is
 used in multiple urlpatterns, the name should be of form `appname_viewname_use`,
-as in `search_advanced_auth` and `search_advanced_unauth`.::
+as in `search_advanced_product` and `search_advanced_content`.::
 
     #urls.py for app search
     urlpatterns = patterns(
@@ -47,6 +47,8 @@ as in `search_advanced_auth` and `search_advanced_unauth`.::
     url(r'^advanced_content_search/$', 'advanced', name='search_advanced_content'),
     ...
     )
+    
+Here the same view `advanced` is used at two different urls and has two different names.
 
 References
 ----------------
