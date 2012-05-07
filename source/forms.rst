@@ -14,13 +14,13 @@ Hiding some fields from ModelForm which are needed for a DB save.
 
 Eg, you want to create a profile for the logged in user.::
 
-    #in Forms.py
+    #in forms.py
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
             exclude = ['user',]
             
-    #In Views:
+    #In views.py:
     form = ProfileForm(request.POST)
     profile = form.save(commit = False)
     profile.user = request.user
