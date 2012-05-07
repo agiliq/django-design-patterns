@@ -29,22 +29,22 @@ extensions = []
 templates_path = ['../themes', '_templates']
 
 # The suffix of source filenames.
-source_suffix = '.txt'
+source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
 
 # General substitutions.
-project = u'Django design patterns'
+project = u'Django Design Patterns'
 copyright = u'2011, Agiliq'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
 # The short X.Y version.
-version = '0.1'
+version = '0.2'
 # The full version, including alpha/beta/rc tags.
-release = '0.1'
+release = '0.2'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -143,7 +143,7 @@ html_last_updated_fmt = '%b %d, %Y'
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Djangodesignpatternsdoc'
+htmlhelp_basename = 'Django Design Patterns'
 
 
 # Options for LaTeX output
