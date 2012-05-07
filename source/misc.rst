@@ -131,3 +131,9 @@ above middleware, the default user can not access even the admin site.
 Hence handle all scenarios in middleware and context processors. This is one place
 where `try: .. except: ..` (bare except) blocks are acceptable. You do not want one
 middleware  bringing down the entire site.
+
+
+Move long running tasks to a message queue.
+------------------------------------------------
+If you have long running requests they should be handled in a message queue, and not in the request thread. For example, using a lot of API calls, will make your pages crawl. Instead move the API processing to a message queue such as `celery <http://celeryproject.org/>`_.
+
