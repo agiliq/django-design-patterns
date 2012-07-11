@@ -158,7 +158,7 @@ htmlhelp_basename = 'Django Design Patterns'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('contents', 'Djangodesignpatterns.tex', u'Django design patterns Documentation',
+  ('index', 'Djangodesignpatterns.tex', u'Django design patterns Documentation',
    u'Agiliq and Contributors', 'manual'),
 ]
 
