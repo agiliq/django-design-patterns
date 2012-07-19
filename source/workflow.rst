@@ -23,7 +23,7 @@ Your code would be using conforming to pep8, which are the standard coding guide
 
 Use pyflakes for static analysis.
 ----------------------------------------------------------------
-`Pyflakes<http://pypi.python.org/pypi/pyflakes>` can find out some common mistakes. Run it after each deploy.
+`Pyflakes <http://pypi.python.org/pypi/pyflakes>`_ can find out some common mistakes. Run it after each deploy.
 
 
 Use a bug tracking tool.
