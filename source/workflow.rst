@@ -13,12 +13,12 @@ should get all the third party apps which are not part of your source control sy
 
 Use virtualenv and pip 
 ---------------------------
-Your various projects might require different versions of third party libraries. Use `virtualenv<http://pypi.python.org/pypi/virtualenv>`_ to keep
-separate environments and use `pip<http://www.pip-installer.org/en/latest/index.html>`_ to manage dependencies.
+Your various projects might require different versions of third party libraries. Use `virtualenv <http://pypi.python.org/pypi/virtualenv>`_ to keep
+separate environments and use `pip <http://www.pip-installer.org/en/latest/index.html>`_ to manage dependencies.
 
 Use pep8.py to check compliance with Python coding guidelines.
 ----------------------------------------------------------------
-Your code would be using conforming to pep8, which are the standard coding guidelines. `Pep8.py<http://pypi.python.org/pypi/pep8>`_ can check your code for deviations.
+Your code would be using conforming to pep8, which are the standard coding guidelines. `Pep8.py <http://pypi.python.org/pypi/pep8>`_ can check your code for deviations.
 
 
 Use pyflakes for static analysis.
