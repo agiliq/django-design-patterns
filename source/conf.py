@@ -80,8 +80,8 @@ pygments_style = 'sphinx'
 # Options for HTML output
 # -----------------------
 
-html_theme = "sphinxdoc2"
-html_theme_path = ["../themes/"]
+html_theme = "agiliq"
+html_theme_path = ["../themes/", "../../themes"]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -92,7 +92,7 @@ html_title = "Django Design Patterns"
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = '../../themes/agiliq/static/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -102,7 +102,7 @@ html_title = "Django Design Patterns"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['.static']
+html_static_path = ['../../themes/agiliq/static/']
 css_files = ['_static/sphinxdoc.css', ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
@@ -137,7 +137,7 @@ html_last_updated_fmt = '%b %d, %Y'
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
-#html_use_opensearch = ''
+html_use_opensearch = 'http://agiliq/books/djangodesignpatterns/'
 
 # If nonempty, this is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = ''
