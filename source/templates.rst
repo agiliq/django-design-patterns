@@ -48,18 +48,17 @@ In your view you do::
 
     posts = BlogPosts.objects.all()
     ...
-    payload = {'posts':posts}
-    return render_to_response('blog/posts.html', payload, ..)
+    payload = {'posts': posts}
+    return render_to_response('blog/posts.html', payload, ...)
     
 Now `posts` may be empty, so in template we do,::
 
-    {% if posts %}
-        {% for post in posts %}
-            ...
+    <ul>    
+    {% for post in posts %}
+        <li>{{ post.title }}</li>
+        {% empty %}
+        <li>Sorry, no posts yet!</li>
     {% endfor %}
+    <ul>
     
-    
-    {% else %}
-
-    {% endif %}
-
+Please, note about `empty` clause using. If `posts` is empty or could not be found, the `empty` clause will be displayed.
