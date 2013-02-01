@@ -99,9 +99,12 @@ Define a get_absolute_url()
 `get_absolute_url` is used at various places by Django. (In Admin for "view on
 site" option, and in feeds framework).
 
-Use @permalink for calculating get_absolute_url
+Use reverse() for calculating get_absolute_url
 ---------------------------------------------------
 You want only one canonical representation of your urls. This should be in urls.py
+
+The `permalink` decorator is `no longer recommended <https://docs.djangoproject.com/en/1.5/ref/models/instances/#the-permalink-decorator>`_ for use.
+
 
 If you write a class like::
 
@@ -116,9 +119,8 @@ You have this representation at two places. You instead want to do::
     class Customer(models.Model)
         ...
         
-        @permalink
         def get_absolute_url(self):
-            return ('customers.detail', self.slug)
+            return reverse('customers.detail', args=[self.slug])
 
 AuditFields
 ----------------
@@ -135,8 +137,8 @@ two DateTimeFields with `auto_now` and `auto_now_add`.::
         updated_on = models.DateTimeField(auto_now = True)
         
 Now you want, created_by and updated_by. This is possible using the
-threadlocals(http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser)
-technique, but since we [do not want](http://www.b-list.org/weblog/2008/dec/24/admin/)
+`threadlocals <http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser>`_
+technique, but since we `do not want <http://www.b-list.org/weblog/2008/dec/24/admin/>`_
 to do that, we will need to pass user to the methods.::
 
     class ItemSoldManager(models.Manager):
