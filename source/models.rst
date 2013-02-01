@@ -99,9 +99,11 @@ Define a get_absolute_url()
 `get_absolute_url` is used at various places by Django. (In Admin for "view on
 site" option, and in feeds framework).
 
-Use @permalink for calculating get_absolute_url
+Use reverse() for calculating get_absolute_url
 ---------------------------------------------------
 You want only one canonical representation of your urls. This should be in urls.py
+
+The `permalink` decorator is [no longer recommended](https://docs.djangoproject.com/en/1.5/ref/models/instances/#the-permalink-decorator) for use.
 
 If you write a class like::
 
@@ -116,9 +118,8 @@ You have this representation at two places. You instead want to do::
     class Customer(models.Model)
         ...
         
-        @permalink
         def get_absolute_url(self):
-            return ('customers.detail', self.slug)
+            return reverse('customers.detail', args=[self.slug])
 
 AuditFields
 ----------------
