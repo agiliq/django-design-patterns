@@ -1,0 +1,3 @@
+[submodule "themes/agiliq"]
+	path = themes/agiliq
+	url = git://github.com/agiliq/Fusion_Sphinx
