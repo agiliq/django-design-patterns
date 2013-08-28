@@ -16,8 +16,8 @@ False in your Model).::
         ...
         is_approved = models.BooleanField(default = False)
         
-        all_objects = models.Manager()
-        objects = ModelClassApprovedOnlyManager()
+        objects = models.Manager()
+        approved_objects = ModelClassApprovedOnlyManager()
         
 If you use multiple managers, the first manager should be the default manager. This is as the first
 manager is accessible as `ModelClass._default_manager`, which is used by admin to get all objects.
