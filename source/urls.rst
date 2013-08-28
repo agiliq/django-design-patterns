@@ -34,7 +34,7 @@ Urlpatterns should be named. [#ref1]_ This is done as::
 
     url(r'^$', 'index', name='main_index'),
     
-This enables calling `{% url urlpatternname %}` much easier.
+This enables calling `{% url 'urlpatternname' %}` much easier.
 
 The pattern name should be of the form `appname_viewname`. If the same view is
 used in multiple urlpatterns, the name should be of form `appname_viewname_use`,
