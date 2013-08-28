@@ -6,7 +6,7 @@ Projects and apps
 --------------------
 
 There should be one `urls.py` at the project level, and one `urls.py` at each app
-level. The project level `urls.py` should include each of the `urls.py` under a
+level. The project level `urls.py` should include each of the app's `urls.py` under a
 prefix.::
 
     #project urls.py
