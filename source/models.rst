@@ -16,8 +16,8 @@ False in your Model).::
         ...
         is_approved = models.BooleanField(default = False)
         
-        all_objects = models.Manager()
-        objects = ModelClassApprovedOnlyManager()
+        objects = models.Manager()
+        approved_objects = ModelClassApprovedOnlyManager()
         
 If you use multiple managers, the first manager should be the default manager. This is as the first
 manager is accessible as `ModelClass._default_manager`, which is used by admin to get all objects.
@@ -26,7 +26,7 @@ Custom Manager Methods
 ----------------------
 Imagine you have a query like this::
     
-    Event.objects.filter(status='P').filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
+    Event.objects.filter(is_published=True).filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
 
 you probably will need to filter by status and created date again, to avoid duplicating 
 code you could add custom methods to your default manager::
@@ -104,7 +104,6 @@ Use reverse() for calculating get_absolute_url
 You want only one canonical representation of your urls. This should be in urls.py
 
 The `permalink` decorator is `no longer recommended <https://docs.djangoproject.com/en/1.5/ref/models/instances/#the-permalink-decorator>`_ for use.
-
 
 If you write a class like::
 
@@ -201,7 +200,7 @@ Other option would be to attach listeners for `post_save` and `post_delete`.::
 
     from django.db.models import signals
     
-    def increment_employee_count(sender, instance, raw, created, **kwargs):
+    def increment_employee_count(sender, instance, created, raw, **kwargs):
         if created:
             instance.department.employee_count += 1
             instance.department.save()
@@ -219,9 +218,3 @@ Abstract custom queries in Manager methods.
 
 If you have some complex Sql query, not easily representable via Django ORM,
 you can write custom Sql. These should be abstracted as Manager methods.
-
-
-
-
-
-
