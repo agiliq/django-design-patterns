@@ -26,7 +26,7 @@ Custom Manager Methods
 ----------------------
 Imagine you have a query like this::
     
-    Event.objects.filter(status='P').filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
+    Event.objects.filter(is_published=True).filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
 
 you probably will need to filter by status and created date again, to avoid duplicating 
 code you could add custom methods to your default manager::
