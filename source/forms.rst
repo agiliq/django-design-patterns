@@ -60,7 +60,7 @@ your ModelForm. Instead of duplicating the field definition (with `help_text`,
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = ['user',]
+            fields = ['picture', 'company']
     
         def __init__(self, *args, **kwargs):
             super(ProfileForm, self).__init__(*args, **kwargs)
@@ -76,12 +76,12 @@ As::
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = ['user',]
+            fields = ['company',]
             
     class UserForm(forms.ModelForm):
         class Meta:
             model = User
-            exclude = [...]
+            fields = [...]
             
     #in views.py
     userform = UserForm(request.POST)
