@@ -200,7 +200,7 @@ Other option would be to attach listeners for `post_save` and `post_delete`.::
 
     from django.db.models import signals
     
-    def increment_employee_count(sender, instance, raw, created, **kwargs):
+    def increment_employee_count(sender, instance, created, raw, **kwargs):
         if created:
             instance.department.employee_count += 1
             instance.department.save()
