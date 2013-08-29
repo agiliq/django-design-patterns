@@ -14,11 +14,16 @@ Hiding some fields from ModelForm which are needed for a DB save.
 
 Eg, you want to create a profile for the logged in user.::
 
+    #in models.py
+    class Profile(models.Model):
+        user = models.OneToOneField(User)
+        company = models.CharField(max_length=50)
+
     #in forms.py
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = ['user',]
+            fields = ['company',]
             
     #In views.py:
     form = ProfileForm(request.POST)
@@ -32,7 +37,7 @@ Or::
 
         class Meta:
             model = Profile
-            exclude =['user',]
+            fields =['company',]
 
         def __init__(self, user, *args, **kwargs)
             self.user = user
