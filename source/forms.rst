@@ -55,7 +55,7 @@ your ModelForm. Instead of duplicating the field definition (with `help_text`,
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = 'user',
+            exclude = ['user',]
     
         def __init__(self, *args, **kwargs):
             super(ProfileForm, self).__init__(*args, **kwargs)
