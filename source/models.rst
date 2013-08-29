@@ -105,7 +105,6 @@ You want only one canonical representation of your urls. This should be in urls.
 
 The `permalink` decorator is `no longer recommended <https://docs.djangoproject.com/en/1.5/ref/models/instances/#the-permalink-decorator>`_ for use.
 
-
 If you write a class like::
 
     class Customer(models.Model)
