@@ -107,8 +107,7 @@ If slugs do not make sense, instead use a CRC algorithm.::
         
         def get_absolute_url(self):
             import zlib
-            #Use permalink in real case
-            return '/customer/%s/' % zlib.crc32(self.pk)
+            return reverse('customers.detail', args=[zlib.crc32(self.pk)])
             
 
 Code defensively in middleware and context processors.
