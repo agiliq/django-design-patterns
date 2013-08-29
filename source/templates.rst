@@ -56,10 +56,8 @@ Now `posts` may be empty, so in template we do,::
     {% if posts %}
         {% for post in posts %}
             ...
-    {% endfor %}
-    
-    
+        {% endfor %}
+
     {% else %}
 
     {% endif %}
-
