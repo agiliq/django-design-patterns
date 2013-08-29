@@ -218,9 +218,3 @@ Abstract custom queries in Manager methods.
 
 If you have some complex Sql query, not easily representable via Django ORM,
 you can write custom Sql. These should be abstracted as Manager methods.
-
-
-
-
-
-
