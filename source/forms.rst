@@ -28,16 +28,17 @@ Eg, you want to create a profile for the logged in user.::
 
 Or::
 
-    #Todo test this
     class ProfileForm(forms.ModelForm):
+
         class Meta:
             model = Profile
             exclude =['user',]
+
         def __init__(self, user, *args, **kwargs)
             self.user = user
             super(ProfileForm, self).__init__(*args, **kwargs)
             
-        def save(*args, **kwargs):
+        def save(self, *args, **kwargs):
             self.instance.user = self.user
             super(ProfileForm, self).save(*args, **kwargs)
 
