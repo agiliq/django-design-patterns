@@ -14,11 +14,16 @@ Hiding some fields from ModelForm which are needed for a DB save.
 
 Eg, you want to create a profile for the logged in user.::
 
+    #in models.py
+    class Profile(models.Model):
+        user = models.OneToOneField(User)
+        company = models.CharField(max_length=50)
+
     #in forms.py
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = ['user',]
+            fields = ['company',]
             
     #In views.py:
     form = ProfileForm(request.POST)
@@ -28,16 +33,17 @@ Eg, you want to create a profile for the logged in user.::
 
 Or::
 
-    #Todo test this
     class ProfileForm(forms.ModelForm):
+
         class Meta:
             model = Profile
-            exclude =['user',]
+            fields =['company',]
+
         def __init__(self, user, *args, **kwargs)
             self.user = user
             super(ProfileForm, self).__init__(*args, **kwargs)
             
-        def save(*args, **kwargs):
+        def save(self, *args, **kwargs):
             self.instance.user = self.user
             super(ProfileForm, self).save(*args, **kwargs)
 
@@ -54,7 +60,7 @@ your ModelForm. Instead of duplicating the field definition (with `help_text`,
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = 'user',
+            fields = ['picture', 'company']
     
         def __init__(self, *args, **kwargs):
             super(ProfileForm, self).__init__(*args, **kwargs)
@@ -70,12 +76,12 @@ As::
     class ProfileForm(forms.ModelForm):
         class Meta:
             model = Profile
-            exclude = ['user',]
+            fields = ['company',]
             
     class UserForm(forms.ModelForm):
         class Meta:
             model = User
-            exclude = [...]
+            fields = [...]
             
     #in views.py
     userform = UserForm(request.POST)
