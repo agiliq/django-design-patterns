@@ -21,9 +21,12 @@ Use pep8.py to check compliance with Python coding guidelines.
 Your code would be using conforming to pep8, which are the standard coding guidelines. `Pep8.py <http://pypi.python.org/pypi/pep8>`_ can check your code for deviations.
 
 
-Use pyflakes for static analysis.
+Use one code analyzer for static analysis.
 ----------------------------------------------------------------
-`Pyflakes <http://pypi.python.org/pypi/pyflakes>`_ can find out some common mistakes. Run it after each deploy.
+* `Pyflakes <http://pypi.python.org/pypi/pyflakes>`_ can find out some common mistakes. 
+* `Pylint <http://www.pylint.org/>`_ code analyzer which looks for programming errors, helps enforcing a coding standard and sniffs for some code smells (as defined in Martin Fowler's Refactoring book).
+
+Run it after each deploy.
 
 
 Use a bug tracking tool.
