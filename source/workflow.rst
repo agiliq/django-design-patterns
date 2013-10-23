@@ -11,10 +11,12 @@ Create a requirements.txt
 Your project should have a requirements.txt file. A `pip install -r requirements.txt`
 should get all the third party apps which are not part of your source control system.
 
-Use virtualenv and pip 
+Use virtualenv and pip (sandbox) 
 ---------------------------
 Your various projects might require different versions of third party libraries. Use `virtualenv <http://pypi.python.org/pypi/virtualenv>`_ to keep
 separate environments and use `pip <http://www.pip-installer.org/en/latest/index.html>`_ to manage dependencies.
+
+If you use virtualenv a long time, you can try `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`
 
 Use pep8.py to check compliance with Python coding guidelines.
 ----------------------------------------------------------------
