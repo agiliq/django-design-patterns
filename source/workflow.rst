@@ -11,19 +11,24 @@ Create a requirements.txt
 Your project should have a requirements.txt file. A `pip install -r requirements.txt`
 should get all the third party apps which are not part of your source control system.
 
-Use virtualenv and pip 
+Use virtualenv and pip (sandbox) 
 ---------------------------
 Your various projects might require different versions of third party libraries. Use `virtualenv <http://pypi.python.org/pypi/virtualenv>`_ to keep
 separate environments and use `pip <http://www.pip-installer.org/en/latest/index.html>`_ to manage dependencies.
+
+If you use virtualenv a long time, you can try `virtualenvwrapper <http://virtualenvwrapper.readthedocs.org/en/latest/>`
 
 Use pep8.py to check compliance with Python coding guidelines.
 ----------------------------------------------------------------
 Your code would be using conforming to pep8, which are the standard coding guidelines. `Pep8.py <http://pypi.python.org/pypi/pep8>`_ can check your code for deviations.
 
 
-Use pyflakes for static analysis.
+Use one code analyzer for static analysis.
 ----------------------------------------------------------------
-`Pyflakes <http://pypi.python.org/pypi/pyflakes>`_ can find out some common mistakes. Run it after each deploy.
+* `Pyflakes <http://pypi.python.org/pypi/pyflakes>`_ can find out some common mistakes. 
+* `Pylint <http://www.pylint.org/>`_ code analyzer which looks for programming errors, helps enforcing a coding standard and sniffs for some code smells (as defined in Martin Fowler's Refactoring book).
+
+Run it after each deploy.
 
 
 Use a bug tracking tool.
