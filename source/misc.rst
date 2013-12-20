@@ -2,6 +2,7 @@
 Misc
 =================
 
+
 settings.py and localsettings.py
 ------------------------------------
 The settings for your project which are a machine specific should be refactored
@@ -12,26 +13,28 @@ out of settings.py into localsettings.py. In your settings.py, you should do::
     except ImportError:
         print 'localsettings could not be imported'
         pass #Or raise
-    
+
 This should be at the end of settings.py, so that localsetting.py override
 settings in settings.py
 
 This file should not be checked in your repository.
+
 
 Use relative path in settings.py
 --------------------------------------
 Instead of writing::
 
     TEMPLATE_DIRS = '/home/user/project/templates'
-    
+
 Do::
 
     #settings.py
     import os
-    
+
     CURRENT_DIR = os.path.dirname(__file__)
     TEMPLATE_DIRS = os.path.join(CURRENT_DIR, 'template')
-    
+
+
 Apps should provide default values for settings they are trying to read.
 ---------------------------------------------------------------------------
 As far as possible, apps should have defaults for settings they are trying to
@@ -45,10 +48,11 @@ Use::
 
 
 
-Use templatetags when the output does not depend on the request
+Use templatetag when the output does not depend on the request
 -------------------------------------------------------------------
 In the sidebar, you want to show the 5 latest comments. You do not need
 the request to output this. Make it a templatetag.
+
 
 Import as if your apps are on your project path
 ----------------------------------------------------
@@ -64,7 +68,7 @@ Model class names should be singular, not plural.::
         ...
 
 and not::
-    
+
     class Posts(models.Model):
         ...
 
@@ -72,15 +76,15 @@ Foreign key should use the name of the referenced class.::
 
     class Post(models.Model):
         user = models.ForeignKey(User)
-        
+
 Querysets should be plural, instances should be singular.::
 
     posts = Post.objects.all()
     posts = Post.objects.filter(...)
-    
+
     post = Post.object.get(pk = 5)
     post = Post.object.latest()
-    
+
 Using pdb remotely
 ------------------------
 Sometimes you will hit bugs which show up on server but not on your local
@@ -88,9 +92,10 @@ system. To handle these, you need to debug on the server. Doing `manage.py
 runserver` only allows local connections. To allow remote connections, use::
 
     python manage.py runserver 0.0.0.0:8000
-    
+
 So that your `pdb.set_trace()` which are on remote servers are hit when you access
 them from your local system.
+
 
 Do not use primary keys in urls
 -----------------------------------
@@ -98,18 +103,18 @@ If you use PK in urls you are giving away sensitive information, for example,
 the number of entries in your table. It also makes it trivial to guess other urls.
 
 Use slugs in urls. This has the advantage of being both user and SEO
-friendly. 
-    
+friendly.
+
 If slugs do not make sense, instead use a CRC algorithm.::
 
     class Customer(models.Model):
         name = models.CharField(max_length = 100)
-        
+
         def get_absolute_url(self):
             import zlib
             #Use permalink in real case
             return '/customer/%s/' % zlib.crc32(self.pk)
-            
+
 
 Code defensively in middleware and context processors.
 -----------------------------------------------------------

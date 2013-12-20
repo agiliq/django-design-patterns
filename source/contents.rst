@@ -1,5 +1,5 @@
 ==================================================
-Welcome to Django design patterns's documentation!
+Django Design Patterns
 ==================================================
 
 Prerequisites
